@@ -17,7 +17,23 @@ import logicalGameObjects.Setpiece;
 
 
 /**
- * fire propagation algorithm,,
+ * fire propagation algorithm
+ * 
+ * 1. Every map tile is split into 9, 3 X 3 tiles.
+ * 
+ *  |0| = |000|
+ *  	  |000|
+ *  	  |000|
+ *  
+ *  2. Then the cells are given a positive int value based on tile type and the objects contained within its' boundaries.
+ *  
+ *  [Tile type constant] - [(# of objects) X (object constant)]
+ *  
+ *  3. Random tile is chosen for the fire to start and set to 0. *int values <= 0 are considered on fire*
+ *  
+ *  4. all adjacent tiles begin losing health. Depending on wind direction some tiles will take extra damage.
+ *  
+ *  5. fire propagates as the adjacent tiles health hits 0 and start to damage tiles adjacent to them.
  * 
  * @author Thomas FUCKING Capach
  */
@@ -26,19 +42,19 @@ public class FirestormArtificialisIntelligentia extends Thread
 	//wind direction
 	private int wDirection = 0;
 	
-	//
+	//Abstract view of the fire spread matrix
 	private int [][] fireGrid = null;
 	
-	//
+	//the levels tile map
 	private int [][] tileMap = null;
 	
-	//
+	//all objects from the level and their positions on the map
 	private Map<Coordinate, Set<Setpiece>> theObjects = null;
 	
-	//
+	// where the fire starts
 	private Coordinate start = null;
 	
-	//
+	//random number generator
 	private Random r = new Random();
 	
 
@@ -71,7 +87,7 @@ public class FirestormArtificialisIntelligentia extends Thread
 
 
 	/**
-	 * 
+	 *loops through array calling fire damage method
 	 */
 	public void run()
 	{
@@ -89,14 +105,14 @@ public class FirestormArtificialisIntelligentia extends Thread
 					{
 					
 						burnBabyBurn(x,y);
-						printGrid();
-
+						
 						try {
-							Thread.sleep(600);
+							Thread.sleep(2000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+			
 					}
 					else
 					{
@@ -108,7 +124,8 @@ public class FirestormArtificialisIntelligentia extends Thread
 				}
 				
 			}
-			
+			printGrid();
+
 		}
 		
 	}
@@ -131,19 +148,28 @@ public class FirestormArtificialisIntelligentia extends Thread
 	 * 6  ax - 1  ay - 1
 	 * 7  ay - 1
 	 * 8  ax + 1  ay - 1
+	 * 
+	 * 
+	 * wind blowing toward the upper right 
+	 * 
+	 * |-5 -15 -30|
+	 * |-5   0 -15|
+	 * |-5  -5  -5|
+	 * 
 	 * */
 	/**
+	 * This method handles the fire damage done to adjacent tiles
 	 * 
-	 * 
-	 * @param x
-	 * @param y
+	 * @param x - x axis position
+	 * @param y - y axis position
 	 */
 	private void burnBabyBurn(int x, int y)
 	{
-		
+		//depending on wind direction the tiles take differing amounts of damage
+		//refer to the above diagrams for further clarification
 		if(wDirection == 1)
 		{
-			
+			//check to make sure the tile is not out of bounds
 			if(y + 1 < fireGrid.length)
 			{
 				
@@ -194,7 +220,7 @@ public class FirestormArtificialisIntelligentia extends Thread
 				{
 					
 					//6
-					fireGrid[y - 1][x - 1] = fireGrid[y - 1][x - 1] - 20;
+					fireGrid[y - 1][x - 1] = fireGrid[y - 1][x - 1] - 30;
 					
 				}
 				
@@ -272,7 +298,7 @@ public class FirestormArtificialisIntelligentia extends Thread
 				{
 					
 					//8
-					fireGrid[y - 1][x + 1] = fireGrid[y - 1][x + 1] - 20;
+					fireGrid[y - 1][x + 1] = fireGrid[y - 1][x + 1] - 30;
 					
 				}
 				
@@ -295,7 +321,7 @@ public class FirestormArtificialisIntelligentia extends Thread
 				{
 					
 					//1
-					fireGrid[y + 1][x - 1] = fireGrid[y + 1][x - 1] - 20;
+					fireGrid[y + 1][x - 1] = fireGrid[y + 1][x - 1] - 30;
 
 				}
 				
@@ -373,7 +399,7 @@ public class FirestormArtificialisIntelligentia extends Thread
 				{
 					
 					//3
-					fireGrid[y + 1][x + 1] = fireGrid[y + 1][x + 1] - 20;
+					fireGrid[y + 1][x + 1] = fireGrid[y + 1][x + 1] - 30;
 				
 				}
 				
@@ -428,68 +454,68 @@ public class FirestormArtificialisIntelligentia extends Thread
 	
 	
 	/*diagram
-	 * 1   2
-	 *   0 
-	 * 3   4
+	 * 1 2
+	 * 3 4
 	 * 
-	 * 
+	 * EX) if the fire starts in quadrant 1 then the wind will be set to try to get the fire to spread more toward quadrant 4
 	 */
 	/**
+	 * You don't need a weather man to know the way the wind blows. You just need this class.(Shameless Bob Dylan reference)
 	 * 
+	 * Based on the fires starting point the wind direction is set to cause the fire to spread out into the level.
 	 */
 	private void youDontNeedAWeatherMan()
 	{
-		
 		
 		System.out.println("Starting point  = " + start.getX() + " " + start.getY());
 		
 		fireGrid[start.getY()][start.getX()] = 0;
 		
-		if(start.getX() < (fireGrid.length / 2))
-		{
-			
-			if(start.getY() < (fireGrid.length / 2))
+			//fire started on the left half of the board
+			if(start.getX() < (fireGrid.length / 2))
 			{
-				
-				wDirection = 4;
+				//fire started on the top half of the board
+				if(start.getY() < (fireGrid.length / 2))
+				{
+					
+					wDirection = 4;
+					
+				}
+				else//fire started on the bottom half of the board
+				{
+					
+					wDirection = 2;
+					
+				}
 				
 			}
-			else
+			else//fire started on the right half of the board
 			{
-				
-				wDirection = 2;
+				//fire started on the top half of the board
+				if(start.getY() < (fireGrid.length / 2))
+				{
+					
+					wDirection = 3;
+					
+				}
+				else//fire started on the bottom half of the board
+				{
+					
+					wDirection = 1;
+					
+				}
 				
 			}
-			
-		}
-		else
-		{
-			
-			if(start.getY() < (fireGrid.length / 2))
-			{
-				
-				wDirection = 3;
-				
-			}
-			else
-			{
-				
-				wDirection = 1;
-				
-			}
-			
-		}
 		
 		
 		System.out.println("The wind blows to the " + wDirection);
-		
 		
 	}
 
 
 
 	/**
-	 * 
+	 * Create the fire spread grid based on the levels tile map
 	 */
 	public void populateGrid()
 	{
@@ -571,42 +597,33 @@ public class FirestormArtificialisIntelligentia extends Thread
 					tic = x * 3;
 					tock = y * 3;
 					
-					for(int a = 0; a < 3; a++)
-					{
-						
-						for(int b = 0; b < 3; b++)
+						for(int a = 0; a < 3; a++)
 						{
 							
+							for(int b = 0; b < 3; b++)
+							{
+	
+								//System.out.print("grid at " + tic + "," + tock);
+								fireGrid[tock][tic] = tC - (fOC * nFO);
+								//System.out.println(" = " + fireGrid[tock][tic]);
+								
+									tic++;
+								
+							}
 							
-
+								tic = x * 3;					
+								tock++;
 							
-							//System.out.print("grid at " + tic + "," + tock);
-							fireGrid[tock][tic] = tC - (fOC * nFO);
-							//System.out.println(" = " + fireGrid[tock][tic]);
-							
-		tic++;
-							
-						}
-tic = x * 3;					
-tock++;
-						
-					}
-				
-					
-					
+						}		
 					
 			}
-			
-			
-			
-			
 			
 		}
 		
 	}
 	
 	/**
-	 * 
+	 * print out the fire grid in console
 	 */
 	public void printGrid()
 	{
@@ -628,6 +645,10 @@ tock++;
 	}
 
 	/**
+	 * NOT USED ATM
+	 * 
+	 *  the idea with this inner class was that the fire would have to wait a certain amount of time before the tile that was on fire would start effecting adjacent tiles
+	 * 
 	 * 
 	 * @author Thomas "I'm fucking drunk right now" Capach
 	 *
@@ -636,9 +657,10 @@ tock++;
 	{
 		
 		private Timer t;
+		
 		private Coordinate co;
 		
-		//
+
 		public FireTile(Coordinate c)
 		{
 			//need object modifiers
@@ -649,7 +671,6 @@ tock++;
 			
 		}
 
-		
 		public void actionPerformed(ActionEvent arg0)
 		{
 
