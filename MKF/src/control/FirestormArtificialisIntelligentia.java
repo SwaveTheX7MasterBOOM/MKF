@@ -457,7 +457,7 @@ public class FirestormArtificialisIntelligentia extends Thread
 	 * 1 2
 	 * 3 4
 	 * 
-	 * EX) if the fire starts in quadrant 1 then the wind will be set to try to get the fire to spread more toward quadrant 4
+	 *  EX) if the fire starts in quadrant 1 then the wind will be set to try to get the fire to spread more toward quadrant 4
 	 */
 	/**
 	 * You don't need a weather man to know the way the wind blows. You just need this class.(Shameless Bob Dylan reference)
