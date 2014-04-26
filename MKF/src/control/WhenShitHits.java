@@ -11,6 +11,7 @@ import java.util.Set;
 import physicalGameObjects.MeleeEnemy;
 import physicalGameObjects.Player;
 
+import logicalGameObjects.Actor;
 import logicalGameObjects.Coordinate;
 import logicalGameObjects.Enemy;
 import logicalGameObjects.PlatformObjects;
@@ -552,7 +553,6 @@ public class WhenShitHits
 	 * @param e - enemy object
 	 * @param i - int
 	 * @return  - a boolean [] containing which paths are blocked
-	 * 
 	 */
 	public static boolean[] Enemy2Setpiece(Enemy e, int i)
 	{
@@ -1215,6 +1215,25 @@ public class WhenShitHits
 		
 	}
 	
+	/**
+	 * return all the objects the character currently sees
+	 * 
+	 * @return Object[]
+	 */
+	public static Object[] sightTest()
+	{
+		 return null;
+	}
+	
+	/**
+	 * check if the character hears anything
+	 * 
+	 * @return
+	 */
+	public static boolean hearingTest()
+	{
+		 return false;
+	}
 	
 	
 }

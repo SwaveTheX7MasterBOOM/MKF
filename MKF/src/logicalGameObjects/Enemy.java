@@ -100,14 +100,14 @@ public abstract class Enemy implements Actor
 	public abstract void setyPos(int yPos);
 	
 	/**
-	 * Returns the direction the enemy is moving
-	 * @return -1 for left, 1 for right, 0 for not moving
+	 * Returns the direction the enemy is facing
+	 * @return 
 	 */
 	public abstract int getDirection();
 	
 	/**
-	 * Sets the direction the enemy is moving
-	 * @param direction -1 for left, 1 for right, 0 for not moving
+	 * Sets the direction the enemy is facing
+	 * @param 
 	 */
 	public abstract void setDirection(int direction);	
 
@@ -122,10 +122,36 @@ public abstract class Enemy implements Actor
 	 * @param hitbox the enemy's hitbox
 	 */
 	public abstract void setHitbox(Rectangle hitbox);
-
 	
 	/** Artificial Intelligence **/
 	public abstract void aI();
+	
+	/** get how far the character can see */
+	public abstract int getSightRange();
+	
+	/** set how far the character can see */
+	public abstract void setSightRange(int sightRange);
+	
+	/** get how far the character can hear */
+	public abstract int getHearingRange();
+	
+	/** set how far the character can hear */
+	public abstract void setHearingRange(int hearingRange);
+	
+	/** get the center position of the characters actual position **/
+	public abstract Coordinate getActualCenter(); 
+	
+	/** get the hearing collision box **/
+	public abstract Polygon gethearingBox();
+	
+	/** set the hearing collision box **/
+	public abstract void sethearingBox(Polygon hearingBox);
+	
+	/** get the sight collision box **/
+	public abstract Polygon getseeingBox();
+	
+	/** set the sight collision box **/
+	public abstract void setseeingBox(Polygon seeingBox);	
 
 	/** make the character stop what it is doing **/
 	public abstract void stopMoving();

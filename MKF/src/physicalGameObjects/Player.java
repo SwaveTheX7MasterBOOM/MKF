@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
 import logicalGameObjects.Actor;
+import logicalGameObjects.Coordinate;
 
 import control.CoreClass;
 
@@ -69,14 +70,16 @@ public class Player implements Actor {
 	//player's hitbox
 	private Rectangle hitbox;
 	
-	//direction player is moving: -1 for left, 0 for not moving, 1 for right
+	//what direction the player is facing
 	private int direction; 
 	
-	//not used atm
-	private int orientation = 0;
+	
+	
 	
 	//not used atm, for platform mode
 	public static boolean isFalling = false;	
+	
+	Coordinate actualCenter;
 
 	
 	//CONSTRUCTOR new player
@@ -89,7 +92,8 @@ public class Player implements Actor {
 		speed = 1;
 		xPos = x;
 		yPos = y;
-		direction = 0;
+		direction = 5;
+		
 		hitbox = new Rectangle(xPos - (pic.getWidth(null)/3), yPos, pic.getWidth(null)+((2*pic.getWidth(null))/3), pic.getHeight(null));	
 		
 		
@@ -241,17 +245,17 @@ public class Player implements Actor {
 	public void setyPos(int yPos) {	this.yPos = yPos;	}
 	
 	/**
-	 * Returns the direction the enemy is moving
-	 * @return -1 for left, 1 for right, 0 for not moving
+	 * Returns the direction the enemy is
+	 * @return 
 	 */
-	public int getDirection() {	return direction;	}
+	public synchronized  int getDirection() {	return direction;	}
 	
 	/**
-	 * Sets the direction the enemy is moving
-	 * @param direction -1 for left, 1 for right, 0 for not moving
+	 * Sets the direction the enemy is
+	 * @param 
 	 */
-	public void setDirection(int direction) {
-		if(direction == 1 || direction == 0 || direction == -1)
+	public synchronized  void setDirection(int direction) {
+		
 			this.direction = direction;	
 	}	
 
@@ -287,21 +291,7 @@ public class Player implements Actor {
 	}	
 */
 
-	// |0 -1 \2 /3  ATM NOT USED
-	public int getOrientation()
-	{
-		
-		return orientation;
-		
-	}
-	
-	//ATM NOT USED	
-	public void setOrientation(int i)
-	{
-		
-		orientation = i;
-		
-	}
+
 	
 	/**
 	 * get the northern hit box of characters melee attack
@@ -831,5 +821,20 @@ public class Player implements Actor {
 		
 	}
 
+
+	/**
+	 * 
+	 */
+	public Coordinate getActualCenter()
+	{
+	
+		 actualCenter = new Coordinate(((mapX + 22 + mapX + 3) / 2),((mapY + 44 + mapY + 35) / 2));
+		
+		 	return actualCenter;
+		
+	}
+
 }
+
+
 

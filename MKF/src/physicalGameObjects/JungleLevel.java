@@ -114,8 +114,8 @@ public class JungleLevel implements Levels
 				
 				
 				
-				smartFire = new FirestormArtificialisIntelligentia(20, map, aPlaceForEverything);
-				smartFire.printGrid();
+				//smartFire = new FirestormArtificialisIntelligentia(20, map, aPlaceForEverything);
+				//smartFire.printGrid();
 
 				
 				maxBound = map.length * tiles[0].getHeight(null);

@@ -325,7 +325,7 @@ public class EnemyAI
 	
 	
 	
-	/** Basic AI for melee type enemies.  The enemy will approach the Player till the player is within 
+	/**NOT IN USE  Basic AI for melee type enemies.  The enemy will approach the Player till the player is within 
 	 * the enemies hit box.  The attack animation will start and at the damage dealing frame the 
 	 * collision method is called and damage is determined there.
 	 *  

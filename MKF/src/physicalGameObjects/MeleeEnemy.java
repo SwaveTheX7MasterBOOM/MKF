@@ -7,6 +7,8 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
+import logicalGameObjects.Actor;
+import logicalGameObjects.Coordinate;
 import logicalGameObjects.Enemy;
 
 import control.EnemyAI;
@@ -93,6 +95,17 @@ public class MeleeEnemy extends Enemy {
 	private Image[] southWest;
 	private Image[] west;
 	private Image[] northWest;
+	
+	//sight and hearing collision boxes
+	private Polygon hearingBox;
+	private Polygon seeingBox;
+	
+	//center point of the characters actual position
+	private Coordinate actualCenter;
+	
+	private int sightRange;
+	private int hearingRange;
+
 
 
 	public MeleeEnemy(int x, int y, int dir, int clx, int cly)
@@ -214,7 +227,7 @@ public class MeleeEnemy extends Enemy {
 	 * @param direction -1 for left, 1 for right, 0 for not moving
 	 */
 	public void setDirection(int direction) {
-		if(direction == 1 || direction == 0 || direction == -1)
+		//if(direction == 1 || direction == 0 || direction == -1)
 			this.direction = direction;	
 	}	
 
@@ -240,7 +253,7 @@ public class MeleeEnemy extends Enemy {
 	 */
 	public Polygon getUpBox()
 	{
-					
+		
 		int [] tempX;
 		int [] tempY;
 		
@@ -267,7 +280,7 @@ public class MeleeEnemy extends Enemy {
 	 */
 	public Polygon getDownBox()
 	{
-
+		 
 		int [] tempX;
 		int [] tempY;
 
@@ -321,7 +334,7 @@ public class MeleeEnemy extends Enemy {
 	 */
 	public Polygon getRightBox()
 	{
-
+		
 		int [] tempX;
 		int [] tempY;
 
@@ -626,7 +639,7 @@ public class MeleeEnemy extends Enemy {
 		
 			if(temp[0] == false)
 			{
-	
+	setDirection(1);
 				yPos = yPos - speed;
 			
 			}
@@ -717,7 +730,7 @@ public class MeleeEnemy extends Enemy {
 		
 			if(temp[0] == false && temp[1] == false)
 			{
-				
+				setDirection(2);
 				xPos = xPos + speed;
 				yPos = yPos - speed;
 			
@@ -754,7 +767,7 @@ public class MeleeEnemy extends Enemy {
 		
 			if(temp[1] == false)
 			{
-				
+				setDirection(3);
 				xPos = xPos + speed;
 	
 			}
@@ -839,7 +852,7 @@ public class MeleeEnemy extends Enemy {
 					}
 					
 				}
-								
+				setDirection(4);			
 					xPos = xPos + speed;
 					yPos = yPos + speed;
 					
@@ -877,7 +890,7 @@ public class MeleeEnemy extends Enemy {
 			
 			if(temp[2] == false)
 			{
-	
+				setDirection(5);
 				yPos = yPos + speed;
 			
 			}
@@ -912,7 +925,7 @@ public class MeleeEnemy extends Enemy {
 		
 			if(temp[2] == false && temp[3] == false)
 			{
-				
+				setDirection(6);
 				xPos = xPos - speed;
 				yPos = yPos + speed;
 			
@@ -949,7 +962,7 @@ public class MeleeEnemy extends Enemy {
 		
 			if(temp[3] == false)
 			{
-				
+				setDirection(7);
 				xPos = xPos - speed;
 		
 			}
@@ -984,7 +997,7 @@ public class MeleeEnemy extends Enemy {
 			
 			if(temp[0] == false && temp[3] == false)
 			{
-				
+				setDirection(8);
 				xPos = xPos - speed;
 				yPos = yPos - speed;
 			
@@ -1260,8 +1273,43 @@ public class MeleeEnemy extends Enemy {
 	 */
 	public void aI()
 	{
-		//
-		EnemyAI.searchCL(this);
+		
+		Object[] see = WhenShitHits.sightTest();
+		boolean hear = WhenShitHits.hearingTest();
+		
+		//System.out.println(getDirection());
+			//i don't see anyone nor do i hear anything moving in the distance
+			if(see == null && hear == false)
+			{
+			
+				EnemyAI.searchCL(this);
+	
+			}
+			else if(see == null && hear == true)//hear something moving near me
+			{
+				
+				//look around
+				
+			}	
+			else if(see == null)//i see something
+			{
+				
+				//chase
+				
+			}	
+		
+	}
+	
+
+	/**
+	 * 
+	 */
+	public Coordinate getActualCenter()
+	{
+		
+		actualCenter = new Coordinate(((xPos + 22 + xPos + 3) / 2),((yPos + 24 + yPos + 15) / 2));
+		
+			return actualCenter;
 		
 	}
 
@@ -1362,6 +1410,96 @@ public class MeleeEnemy extends Enemy {
 		
 		
 	}
+
+	/**
+	 * get the hearing collision box
+	 * 
+	 * @return Polygon
+	 */
+	public Polygon gethearingBox()
+	{
+		
+		return hearingBox;
+		
+	}
+
+	/**
+	 * set the hearing collision box
+	 * 
+	 * @param Polygon
+	 */
+	public void sethearingBox(Polygon hearingBox)
+	{
+		
+		this.hearingBox = hearingBox;
+		
+	}
+
+	/**
+	 * get the seeing collision box
+	 * 
+	 * @return Polygon
+	 */
+	public Polygon getseeingBox()
+	{
+		
+		return seeingBox;
+		
+	}
+
+	/**
+	 * set the seeing collision box
+	 * 
+	 * @param Polygon
+	 */
+	public void setseeingBox(Polygon seeingBox)
+	{
+		
+		this.seeingBox = seeingBox;
+	
+	}
+
+	/**
+	 * get how far the character can see
+	 */
+	public int getSightRange()
+	{
+		
+		return sightRange;
+		
+	}
+
+	/**
+	 * set how far the character can see
+	 */
+	public void setSightRange(int sightRange)
+	{
+		
+		this.sightRange = sightRange;
+		
+	}
+
+	/**
+	 * get how far the character can hear
+	 */
+	public int getHearingRange()
+	{
+		
+		return 0;
+		
+	}
+
+	/**
+	 * set how far the character can hear
+	 */
+	public void setHearingRange(int hearingRange)
+	{
+		
+		this.hearingRange = hearingRange;
+		
+	}
+
+
 	
 
 }

@@ -22,7 +22,7 @@ public class MovementManager extends Thread
 	private boolean onPath = false;
 	
 	private int attack = 0;
-	private int facing = 5;
+	//private int facing = 5;
 	
 	private final int baseSpeed = CoreClass.mainCharacter.getSpeed();
 	
@@ -34,8 +34,8 @@ public class MovementManager extends Thread
 		
 		public void run()
 		{
-			
-			switch(facing)
+			System.out.println(CoreClass.mainCharacter.getDirection()+"+++++++++++++++++++++++++++++++++++++++++");
+			switch(CoreClass.mainCharacter.getDirection())
 			{
 			
 				case 1:
@@ -313,7 +313,7 @@ public class MovementManager extends Thread
 		public void run()
 		{
 			
-			CoreClass.mainCharacter.setOrientation(0);
+			CoreClass.mainCharacter.setDirection(1);
 			
 			
 			try
@@ -381,7 +381,7 @@ public class MovementManager extends Thread
 		public void run()
 		{
 			
-			CoreClass.mainCharacter.setOrientation(3);
+			CoreClass.mainCharacter.setDirection(2);
 			
 			try
 			{
@@ -447,7 +447,7 @@ public class MovementManager extends Thread
 		public void run()
 		{
 			
-			CoreClass.mainCharacter.setOrientation(1);
+			CoreClass.mainCharacter.setDirection(3);
 			
 			try
 			{
@@ -513,7 +513,7 @@ public class MovementManager extends Thread
 		public void run()
 		{
 			
-			CoreClass.mainCharacter.setOrientation(2);
+			CoreClass.mainCharacter.setDirection(4);
 			
 			try
 			{
@@ -579,7 +579,7 @@ public class MovementManager extends Thread
 		public void run()
 		{
 			
-			CoreClass.mainCharacter.setOrientation(0);
+			CoreClass.mainCharacter.setDirection(5);
 			
 			
 			try
@@ -646,7 +646,7 @@ public class MovementManager extends Thread
 		public void run()
 		{
 			
-			CoreClass.mainCharacter.setOrientation(3);
+			CoreClass.mainCharacter.setDirection(6);
 			
 			try
 			{
@@ -712,7 +712,7 @@ public class MovementManager extends Thread
 		public void run()
 		{
 			
-			CoreClass.mainCharacter.setOrientation(1);
+			CoreClass.mainCharacter.setDirection(7);
 			
 			try
 			{
@@ -778,7 +778,7 @@ public class MovementManager extends Thread
 		public void run()
 		{
 			
-			CoreClass.mainCharacter.setOrientation(2);
+			CoreClass.mainCharacter.setDirection(8);
 			
 			try
 			{
@@ -843,23 +843,29 @@ public class MovementManager extends Thread
 		
 		while(true)
 		{
-			//CONSIDER CHNAGEING MULTIPLE OCCURENCES OF GETTING X AND Y VALUES TO COORDINATE OBJECTS AND WORKING WITH THAT ONE RETREIVED OBJECT	
+			//CONSIDER CHNAGEING MULTIPLE OCCURENCES OF GETTING X AND Y VALUES TO COORDINATE OBJECTS AND WORKING WITH THAT ONE RETREIVED OBJECT	 
 			
+			//update keyboard
 			CoreClass.InCa.update();	
 			
-			int tile = CoreClass.getCurrentLevel().getMap()[CoreClass.mainCharacter.getMapY()/102][CoreClass.mainCharacter.getMapX()/102];
+			//find the tile code for the tile the character currently occupies
+			int tile = CoreClass.getCurrentLevel().getMap()[CoreClass.mainCharacter.getActualCenter().getY()/102][CoreClass.mainCharacter.getActualCenter().getX()/102];
 		
 			//check logic later to ensure accuracy
 				if((tile != 1) && CoreClass.mainCharacter.getSpeed() == baseSpeed)
 				{
+					
 					onPath = true;
-					CoreClass.mainCharacter.setSpeed(CoreClass.mainCharacter.getSpeed() * 2);
+					
+						CoreClass.mainCharacter.setSpeed(CoreClass.mainCharacter.getSpeed() * 2);
 					
 				}
 				else if((tile == 1) && CoreClass.mainCharacter.getSpeed() != baseSpeed)
 				{
+					
 					onPath = false;
-					CoreClass.mainCharacter.setSpeed(CoreClass.mainCharacter.getSpeed() / 2);
+					
+						CoreClass.mainCharacter.setSpeed(CoreClass.mainCharacter.getSpeed() / 2);
 					
 				}
 			
@@ -906,7 +912,7 @@ public class MovementManager extends Thread
 				if(CoreClass.InCa.isKeyDown(KeyEvent.VK_SPACE) && attack == 0)
 				{
 					
-					System.out.println(attack+"Attack"+facing);
+					System.out.println(attack+"Attack"+CoreClass.mainCharacter.getDirection());
 					attack = 1;
 					es.execute(attacking);
 					
@@ -1118,63 +1124,63 @@ public class MovementManager extends Thread
 						
 						es.execute(northEastMove);
 						
-							facing = 2;
+							CoreClass.mainCharacter.setDirection(2);
 						
 					}
 					else if((up == true && left == true))
 					{
 
 						es.execute(northWestMove);
-						
-							facing = 8;
+						CoreClass.mainCharacter.setDirection(8);
+							//facing = 8;
 							
 					}
 					else if((down == true && right == true))
 					{
 					
 						es.execute(southEastMove);
-						
-							facing = 4;
+						CoreClass.mainCharacter.setDirection(4);
+							//facing = 4;
 						
 					}
 					else if((down == true && left == true))
 					{
 
-						es.execute(southWestMove);//System.out.println("anamate");
-						
-							facing = 6;
+						es.execute(southWestMove);
+						CoreClass.mainCharacter.setDirection(6);
+							//facing = 6;
 						
 					}
-					else if(right == true)// && up == false && down == false)
+					else if(right == true)
 					{
 						
 						es.execute(eastMove);
-						
-							facing = 3;
+						CoreClass.mainCharacter.setDirection(3);
+							//facing = 3;
 								
 					}
-					else if(left == true)// && up == false && down == false && right == false)
+					else if(left == true)
 					{
 					
 						es.execute(westMove);
-						
-							facing = 7;
+						CoreClass.mainCharacter.setDirection(7);
+							//facing = 7;
 
 					}
-					else if(up == true)// && right == false && left == false && down == false)
+					else if(up == true)
 					{
 					
 						es.execute(northMove);
-						
-							facing = 1;
+						CoreClass.mainCharacter.setDirection(1);
+							//facing = 1;
 						
 					}
-					else if(down == true)// && right == false && left == false && up == true)
+					else if(down == true)
 					{
 						
 						es.execute(southMove);
-						
-							facing = 5;
+						CoreClass.mainCharacter.setDirection(5);
+							//facing = 5;
 	
 					}
 
