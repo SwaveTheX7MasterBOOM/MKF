@@ -1,9 +1,11 @@
 package control;
 
 import java.awt.Image;
+import java.util.Random;
 
 import physicalGameObjects.MeleeEnemy;
 
+import logicalGameObjects.Actor;
 import logicalGameObjects.Enemy;
 
 
@@ -319,11 +321,75 @@ public class EnemyAI
 
 	}
 	
+	/**
+	 * NOT IN USE
+	 * 
+	 * @param billMurray
+	 * @param scarlettJohansson
+	 */
+	public static void pathTo(Actor billMurray, Actor scarlettJohansson)
+	{
+		
+		
+		
+	}
 	
-	
+	/**
+	 * NOT IN USE
+	 * 
+	 * @param georgeClooney
+	 */
+	public static void randomLookAround(final Enemy georgeClooney)
+	{
 
-	
-	
+
+				
+					//temp variable containing the direction the character is currently facing
+					int tempDir = georgeClooney.getDirection();
+					
+					
+					//randomness
+					Random r = new Random();
+					
+					
+						//turn character to the right and check if it sees anything
+						if(r.nextBoolean() == true)
+						{
+						
+							if(tempDir == 1)
+							{
+								
+								georgeClooney.setDirection(8);
+								
+							}
+							else
+							{
+								georgeClooney.setDirection(tempDir - 1);
+								
+							}
+							
+						}
+						else// turn character to the left and see if it sees anything
+						{
+							
+							if(tempDir == 8)
+							{
+								
+								georgeClooney.setDirection(1);
+								
+							}
+							else
+							{
+								georgeClooney.setDirection(tempDir + 1);
+								
+							}
+							
+						}
+						
+
+		
+	}
+			
 	
 	/**NOT IN USE  Basic AI for melee type enemies.  The enemy will approach the Player till the player is within 
 	 * the enemies hit box.  The attack animation will start and at the damage dealing frame the 

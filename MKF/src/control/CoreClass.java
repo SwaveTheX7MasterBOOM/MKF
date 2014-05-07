@@ -102,7 +102,7 @@ public class CoreClass
 					es.shutdown();
 			
 
-		//	Thread tt2 = new Thread(new FirestormArtificialisIntelligentia(10,  CoreClass.getCurrentLevel().getMap() , CoreClass.getCurrentLevel().get));
+		//	Thread tt2 = new Thread(new FireSpreadAlgorithm(10,  CoreClass.getCurrentLevel().getMap() , CoreClass.getCurrentLevel().get));
 			//tt2.start();
 			
 	}

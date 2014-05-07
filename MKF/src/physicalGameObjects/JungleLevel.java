@@ -20,7 +20,7 @@ import logicalGameObjects.Setpiece;
 
 
 import control.CoreClass;
-import control.FirestormArtificialisIntelligentia;
+import control.FireSpreadAlgorithm;
 import control.MapMaker;
 
 /**@author Thomas "Cobra Commander" Capach **/
@@ -69,7 +69,7 @@ public class JungleLevel implements Levels
 	private Set<Setpiece> allObjects; 
 	
 	//instance of the fire propagation class
-	private FirestormArtificialisIntelligentia smartFire;
+	private FireSpreadAlgorithm smartFire;
 	
 	//coordinates for all the objects
 	private Map<Coordinate, Set<Setpiece>> aPlaceForEverything;
@@ -114,7 +114,7 @@ public class JungleLevel implements Levels
 				
 				
 				
-				//smartFire = new FirestormArtificialisIntelligentia(20, map, aPlaceForEverything);
+				//smartFire = new FireSpreadAlgorithm(20, map, aPlaceForEverything);
 				//smartFire.printGrid();
 
 				

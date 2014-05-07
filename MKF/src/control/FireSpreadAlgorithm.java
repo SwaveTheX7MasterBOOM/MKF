@@ -37,7 +37,7 @@ import logicalGameObjects.Setpiece;
  * 
  * @author Thomas FUCKING Capach
  */
-public class FirestormArtificialisIntelligentia extends Thread
+public class FireSpreadAlgorithm extends Thread
 {
 	//wind direction
 	private int wDirection = 0;
@@ -65,7 +65,7 @@ public class FirestormArtificialisIntelligentia extends Thread
 	 * @param tileMap
 	 * @param theObjects
 	 */
-	public FirestormArtificialisIntelligentia(int s, int[][] tileMap, Map<Coordinate, Set<Setpiece>> theObjects)
+	public FireSpreadAlgorithm(int s, int[][] tileMap, Map<Coordinate, Set<Setpiece>> theObjects)
 	{
 			
 		this.tileMap = tileMap;

@@ -3,9 +3,12 @@ package physicalGameObjects;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 import logicalGameObjects.Actor;
 import logicalGameObjects.Coordinate;
@@ -103,8 +106,36 @@ public class MeleeEnemy extends Enemy {
 	//center point of the characters actual position
 	private Coordinate actualCenter;
 	
+	//how large the hearing and sight collisions objects will be
 	private int sightRange;
 	private int hearingRange;
+
+	//if the character has been heard
+	private boolean heard = false;
+	
+	// how many times the character may look around after hearing something before resuming normal search pattern
+	//IDEA:  add functionality to up the number times this character looks around and shorten the duration they take looking in that direction to simulate jumpiness
+	private int alerted = 3;
+	
+	//prevent actions being taken till timer is up
+	private boolean stopAndLook = false;
+	
+	//sets stop and look to false after the timer has run out
+	private ActionListener turnAL = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0)
+		{
+			//stopAndLook = false;
+			
+		}
+		
+	};
+	
+	//how look the character takes looking before moving to the next step
+	private Timer turnTimer = new Timer(1000, turnAL);
+	
+
 
 
 
@@ -1273,32 +1304,80 @@ public class MeleeEnemy extends Enemy {
 	 */
 	public void aI()
 	{
-		
-		Object[] see = WhenShitHits.sightTest();
-		boolean hear = WhenShitHits.hearingTest();
-		
-		//System.out.println(getDirection());
-			//i don't see anyone nor do i hear anything moving in the distance
-			if(see == null && hear == false)
-			{
 			
-				EnemyAI.searchCL(this);
-	
-			}
-			else if(see == null && hear == true)//hear something moving near me
+			Object[] see = WhenShitHits.sightTest();
+
+			if(alerted == 0)
 			{
-				
-				//look around
-				
+			heard = WhenShitHits.hearingTest();
 			}	
-			else if(see == null)//i see something
-			{
+			
+				//*i don't see anyone nor do i hear anything moving in the distance*
+				if(see == null && heard == false)
+				{
 				
-				//chase
-				
-			}	
+					EnemyAI.searchCL(this);
 		
+				}
+				else if(see == null && heard == true)//hear something moving near me
+				{
+					
+					//*look around*
+					/*
+					 if(stopAndLook == false)
+					 {
+					 	if(alerted == 0)
+					 	{
+					 		EnemyAI.randomLookAround(this);
+							alerted = r.nextInt(3)+1;
+							stopAndLook == true;
+							turnTimer.start();
+					 	
+					 	}
+					 	else
+					 	{
+					 	
+					 	alerted--;
+					 	EnemyAI.randomLookAround(this);
+					 	turnTimer.start();
+					 	
+					 	}
+				
+					}
+	
+					
+					*/
+				}	
+				else if(see != null)//*i see something*
+				{
+					
+					//chase
+					
+					/*Actor temp;
+					 * 
+					 * for(see:Object o)
+					 * {
+					 * 
+					 * if(o instanceOf Player)
+					 * {
+					 * 
+					 * }
+					 * else if()
+					 * {
+					 * 
+					 * 
+					 * }
+					 * 
+					 * 
+					 * }
+					 * EnemyAI.pathTo(this,temp);
+					 */
+					
+				}	
+				
 	}
+		
+	
 	
 
 	/**
@@ -1485,7 +1564,7 @@ public class MeleeEnemy extends Enemy {
 	public int getHearingRange()
 	{
 		
-		return 0;
+		return hearingRange;
 		
 	}
 
@@ -1499,7 +1578,21 @@ public class MeleeEnemy extends Enemy {
 		
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public int getAlerted() {
+		return alerted;
+	}
 
+	/**
+	 * 
+	 * @param alerted
+	 */
+	public void setAlerted(int alerted) {
+		this.alerted = alerted;
+	}
 	
 
 }

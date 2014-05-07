@@ -22,7 +22,7 @@ public class MovementManager extends Thread
 	private boolean onPath = false;
 	
 	private int attack = 0;
-	//private int facing = 5;
+
 	
 	private final int baseSpeed = CoreClass.mainCharacter.getSpeed();
 	
@@ -34,7 +34,7 @@ public class MovementManager extends Thread
 		
 		public void run()
 		{
-			System.out.println(CoreClass.mainCharacter.getDirection()+"+++++++++++++++++++++++++++++++++++++++++");
+			//System.out.println(CoreClass.mainCharacter.getDirection()+"+++++++++++++++++++++++++++++++++++++++++");
 			switch(CoreClass.mainCharacter.getDirection())
 			{
 			
@@ -74,9 +74,7 @@ public class MovementManager extends Thread
 					break;
 			
 				case 2:
-					
-					//CoreClass.mainCharacter.setxPos(CoreClass.mainCharacter.getxPos() + (CoreClass.mainCharacter.idleImages(1).getWidth(null) / 2) - (CoreClass.mainCharacter.attackImage(1).getWidth(null) / 2));
-					
+
 					CoreClass.mainCharacter.setyPos(CoreClass.mainCharacter.getyPos() - (CoreClass.mainCharacter.attackImage(1).getHeight(null) / 2));
 						
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.attackImage(2));
@@ -96,8 +94,7 @@ public class MovementManager extends Thread
 						}
 							
 					
-					//CoreClass.mainCharacter.setxPos(CoreClass.mainCharacter.getxPos() - (CoreClass.mainCharacter.idleImages(1).getWidth(null) / 2) + (CoreClass.mainCharacter.attackImage(1).getWidth(null) / 2));
-					
+		
 					CoreClass.mainCharacter.setyPos(CoreClass.mainCharacter.getyPos() + (CoreClass.mainCharacter.attackImage(1).getHeight(null) / 2));
 						
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.idleImages(2));
@@ -107,9 +104,7 @@ public class MovementManager extends Thread
 				break;
 					
 				case 3:
-					
-					//CoreClass.mainCharacter.setxPos(CoreClass.mainCharacter.getxPos() + (CoreClass.mainCharacter.idleImages(1).getWidth(null) / 2) - (CoreClass.mainCharacter.attackImage(1).getWidth(null) / 2));
-					
+	
 					CoreClass.mainCharacter.setyPos(CoreClass.mainCharacter.getyPos() - (CoreClass.mainCharacter.attackImage(1).getHeight(null) / 2));
 						
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.attackImage(3));
@@ -128,9 +123,7 @@ public class MovementManager extends Thread
 							
 						}
 							
-					
-					//CoreClass.mainCharacter.setxPos(CoreClass.mainCharacter.getxPos() - (CoreClass.mainCharacter.idleImages(1).getWidth(null) / 2) + (CoreClass.mainCharacter.attackImage(1).getWidth(null) / 2));
-					
+
 					CoreClass.mainCharacter.setyPos(CoreClass.mainCharacter.getyPos() + (CoreClass.mainCharacter.attackImage(1).getHeight(null) / 2));
 						
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.idleImages(3));
@@ -140,11 +133,7 @@ public class MovementManager extends Thread
 				break;
 					
 				case 4:
-					
-					//CoreClass.mainCharacter.setxPos(CoreClass.mainCharacter.getxPos() + (CoreClass.mainCharacter.idleImages(1).getWidth(null) / 2) - (CoreClass.mainCharacter.attackImage(1).getWidth(null) / 2));
-					
-					//CoreClass.mainCharacter.setyPos(CoreClass.mainCharacter.getyPos() - (CoreClass.mainCharacter.attackImage(1).getHeight(null) / 2));
-						
+	
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.attackImage(4));
 					
 					WhenShitHits.playerMeleeAttSetpiece(4);
@@ -161,11 +150,7 @@ public class MovementManager extends Thread
 							
 						}
 							
-					
-					//CoreClass.mainCharacter.setxPos(CoreClass.mainCharacter.getxPos() - (CoreClass.mainCharacter.idleImages(1).getWidth(null) / 2) + (CoreClass.mainCharacter.attackImage(1).getWidth(null) / 2));
-					
-					//CoreClass.mainCharacter.setyPos(CoreClass.mainCharacter.getyPos() + (CoreClass.mainCharacter.attackImage(1).getHeight(null) / 2));
-						
+
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.idleImages(4));
 						
 					attack = 0;
@@ -204,9 +189,7 @@ public class MovementManager extends Thread
 				case 6:
 					
 					CoreClass.mainCharacter.setxPos(CoreClass.mainCharacter.getxPos() - (CoreClass.mainCharacter.attackImage(1).getWidth(null) / 2));
-					
-					//CoreClass.mainCharacter.setyPos(CoreClass.mainCharacter.getyPos() - (CoreClass.mainCharacter.attackImage(1).getHeight(null) / 2));
-						
+
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.attackImage(6));
 					
 					WhenShitHits.playerMeleeAttSetpiece(6);
@@ -225,9 +208,7 @@ public class MovementManager extends Thread
 							
 					
 					CoreClass.mainCharacter.setxPos(CoreClass.mainCharacter.getxPos() + (CoreClass.mainCharacter.attackImage(1).getWidth(null) / 2));
-					
-					//CoreClass.mainCharacter.setyPos(CoreClass.mainCharacter.getyPos() + (CoreClass.mainCharacter.attackImage(1).getHeight(null) / 2));
-						
+		
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.idleImages(6));
 						
 					attack = 0;
@@ -912,7 +893,7 @@ public class MovementManager extends Thread
 				if(CoreClass.InCa.isKeyDown(KeyEvent.VK_SPACE) && attack == 0)
 				{
 					
-					System.out.println(attack+"Attack"+CoreClass.mainCharacter.getDirection());
+					//System.out.println(attack+"Attack"+CoreClass.mainCharacter.getDirection());
 					attack = 1;
 					es.execute(attacking);
 					
@@ -1132,7 +1113,7 @@ public class MovementManager extends Thread
 
 						es.execute(northWestMove);
 						CoreClass.mainCharacter.setDirection(8);
-							//facing = 8;
+							
 							
 					}
 					else if((down == true && right == true))
@@ -1140,7 +1121,7 @@ public class MovementManager extends Thread
 					
 						es.execute(southEastMove);
 						CoreClass.mainCharacter.setDirection(4);
-							//facing = 4;
+							
 						
 					}
 					else if((down == true && left == true))
@@ -1148,7 +1129,7 @@ public class MovementManager extends Thread
 
 						es.execute(southWestMove);
 						CoreClass.mainCharacter.setDirection(6);
-							//facing = 6;
+							
 						
 					}
 					else if(right == true)
@@ -1156,7 +1137,7 @@ public class MovementManager extends Thread
 						
 						es.execute(eastMove);
 						CoreClass.mainCharacter.setDirection(3);
-							//facing = 3;
+						
 								
 					}
 					else if(left == true)
@@ -1164,7 +1145,7 @@ public class MovementManager extends Thread
 					
 						es.execute(westMove);
 						CoreClass.mainCharacter.setDirection(7);
-							//facing = 7;
+							
 
 					}
 					else if(up == true)
@@ -1172,7 +1153,7 @@ public class MovementManager extends Thread
 					
 						es.execute(northMove);
 						CoreClass.mainCharacter.setDirection(1);
-							//facing = 1;
+							
 						
 					}
 					else if(down == true)
@@ -1180,7 +1161,7 @@ public class MovementManager extends Thread
 						
 						es.execute(southMove);
 						CoreClass.mainCharacter.setDirection(5);
-							//facing = 5;
+							
 	
 					}
 
