@@ -1,8 +1,8 @@
 package control;
 
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,12 +19,12 @@ public class MovementManager extends Thread
 	private boolean down = false;
 	private boolean left = false;
 	private boolean right = false;	
-	private boolean onPath = false;
+	//private boolean onPath = false;
 	
 	private int attack = 0;
 
 	
-	private final int baseSpeed = CoreClass.mainCharacter.getSpeed();
+	//private final int baseSpeed = CoreClass.mainCharacter.getSpeed();
 	
 	private ExecutorService es = Executors.newSingleThreadExecutor();
 	
@@ -305,36 +305,19 @@ public class MovementManager extends Thread
 					
 					CoreClass.mainCharacter.setPic(temp[0]);
 				
-						if(onPath == true)
-						{
-							
-							Thread.sleep(200);
+
+							//sleep based on speed
+							Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 						
-						}
-						else
-						{
-							
-							Thread.sleep(400);
-							
-						}
+	
 						
 					if(up == true && (right == false && left == false && down == false) && (attack == 0))
 					{
 						
 						CoreClass.mainCharacter.setPic(temp[1]);
 						
-							if(onPath == true)
-							{
-								
-								Thread.sleep(200);
-							
-							}
-							else
-							{
-								
-								Thread.sleep(400);
-								
-							}
+						//sleep based on speed
+						Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 							
 					}
 	
@@ -372,36 +355,16 @@ public class MovementManager extends Thread
 					
 					CoreClass.mainCharacter.setPic(temp[0]);
 				
-						if(onPath == true)
-						{
-							
-							Thread.sleep(200);
-						
-						}
-						else
-						{
-							
-							Thread.sleep(400);
-							
-						}
+					//sleep based on speed
+					Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 						
 					if((up == true && right == true) && (left == false && down == false) && (attack == 0))
 					{
 						
 						CoreClass.mainCharacter.setPic(temp[1]);
 						
-							if(onPath == true)
-							{
-								
-								Thread.sleep(200);
-							
-							}
-							else
-							{
-								
-								Thread.sleep(400);
-								
-							}
+						//sleep based on speed
+						Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 							
 					}
 	
@@ -438,36 +401,16 @@ public class MovementManager extends Thread
 					
 					CoreClass.mainCharacter.setPic(temp[0]);
 				
-						if(onPath == true)
-						{
-							
-							Thread.sleep(200);
-						
-						}
-						else
-						{
-							
-							Thread.sleep(400);
-							
-						}
+					//sleep based on speed
+					Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 						
 					if(right == true && (up == false && left == false && down == false) && (attack == 0))
 					{
 						
 						CoreClass.mainCharacter.setPic(temp[1]);
 						
-							if(onPath == true)
-							{
-								
-								Thread.sleep(200);
-							
-							}
-							else
-							{
-								
-								Thread.sleep(400);
-								
-							}
+						//sleep based on speed
+						Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 							
 					}
 	
@@ -504,36 +447,16 @@ public class MovementManager extends Thread
 					
 					CoreClass.mainCharacter.setPic(temp[0]);
 				
-						if(onPath == true)
-						{
-							
-							Thread.sleep(200);
-						
-						}
-						else
-						{
-							
-							Thread.sleep(400);
-							
-						}
+					//sleep based on speed
+					Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 						
 					if((down == true && right == true) && (up == false && left == false) && (attack == 0))
 					{
 						
 						CoreClass.mainCharacter.setPic(temp[1]);
 						
-							if(onPath == true)
-							{
-								
-								Thread.sleep(200);
-							
-							}
-							else
-							{
-								
-								Thread.sleep(400);
-								
-							}
+						//sleep based on speed
+						Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 							
 					}
 	
@@ -571,36 +494,16 @@ public class MovementManager extends Thread
 					
 					CoreClass.mainCharacter.setPic(temp[0]);
 				
-						if(onPath == true)
-						{
-							
-							Thread.sleep(200);
-						
-						}
-						else
-						{
-							
-							Thread.sleep(400);
-							
-					}
+					//sleep based on speed
+					Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 						
 					if(down == true && (up == false && right == false && left == false) && (attack == 0))
 					{
 						
 						CoreClass.mainCharacter.setPic(temp[1]);
 						
-							if(onPath == true)
-							{
-								
-								Thread.sleep(200);
-							
-							}
-							else
-							{
-								
-								Thread.sleep(400);
-								
-							}
+						//sleep based on speed
+						Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 							
 					}
 	
@@ -637,36 +540,16 @@ public class MovementManager extends Thread
 					
 					CoreClass.mainCharacter.setPic(temp[0]);
 				
-						if(onPath == true)
-						{
-							
-							Thread.sleep(200);
-						
-						}
-						else
-						{
-							
-							Thread.sleep(400);
-							
-						}
+					//sleep based on speed
+					Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 						
 					if((down == true && left == true) && (up == false && right == false) && (attack == 0))
 					{
 						
 						CoreClass.mainCharacter.setPic(temp[1]);
 						
-							if(onPath == true)
-							{
-								
-								Thread.sleep(200);
-							
-							}
-							else
-							{
-								
-								Thread.sleep(400);
-								
-							}
+						//sleep based on speed
+						Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 								
 					}
 	
@@ -703,36 +586,16 @@ public class MovementManager extends Thread
 					
 					CoreClass.mainCharacter.setPic(temp[0]);
 				
-						if(onPath == true)
-						{
-							
-							Thread.sleep(200);
-						
-						}
-						else
-						{
-							
-							Thread.sleep(400);
-							
-						}
+					//sleep based on speed
+					Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 						
 					if(left == true && (right == false && up == false && down == false) && (attack == 0))
 					{
 						
 						CoreClass.mainCharacter.setPic(temp[1]);
 						
-							if(onPath == true)
-							{
-								
-								Thread.sleep(200);
-							
-							}
-							else
-							{
-								
-								Thread.sleep(400);
-								
-							}
+						//sleep based on speed
+						Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 							
 					}
 	
@@ -769,36 +632,16 @@ public class MovementManager extends Thread
 					
 					CoreClass.mainCharacter.setPic(temp[0]);
 				
-						if(onPath == true)
-						{
-							
-							Thread.sleep(200);
-						
-						}
-						else
-						{
-							
-							Thread.sleep(400);
-							
-						}
+					//sleep based on speed
+					Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 						
 					if((left == true && up == true) && (right == false && down == false) && (attack == 0))
 					{
 						
 						CoreClass.mainCharacter.setPic(temp[1]);
 						
-							if(onPath == true)
-							{
-								
-								Thread.sleep(200);
-							
-							}
-							else
-							{
-								
-								Thread.sleep(400);
-								
-							}
+						//sleep based on speed
+						Thread.sleep(600 - (CoreClass.mainCharacter.getSpeed() * 100));
 							
 					}
 	
@@ -827,31 +670,11 @@ public class MovementManager extends Thread
 			//CONSIDER CHNAGEING MULTIPLE OCCURENCES OF GETTING X AND Y VALUES TO COORDINATE OBJECTS AND WORKING WITH THAT ONE RETREIVED OBJECT	 
 			
 			//update keyboard
-			CoreClass.InCa.update();	
+			CoreClass.KeyIn.update();	
 			
-			//find the tile code for the tile the character currently occupies
-			int tile = CoreClass.getCurrentLevel().getMap()[CoreClass.mainCharacter.getActualCenter().getY()/102][CoreClass.mainCharacter.getActualCenter().getX()/102];
-		
-			//check logic later to ensure accuracy
-				if((tile != 1) && CoreClass.mainCharacter.getSpeed() == baseSpeed)
-				{
-					
-					onPath = true;
-					
-						CoreClass.mainCharacter.setSpeed(CoreClass.mainCharacter.getSpeed() * 2);
-					
-				}
-				else if((tile == 1) && CoreClass.mainCharacter.getSpeed() != baseSpeed)
-				{
-					
-					onPath = false;
-					
-						CoreClass.mainCharacter.setSpeed(CoreClass.mainCharacter.getSpeed() / 2);
-					
-				}
 			
 				//testing for health bar
-				if(CoreClass.InCa.isKeyDown(KeyEvent.VK_R))
+				if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_R))
 				{
 					Random r = new Random();
 					
@@ -867,7 +690,7 @@ public class MovementManager extends Thread
 					CoreClass.healthBar.update();
 				}
 				//testing for health bar
-				if(CoreClass.InCa.isKeyDown(KeyEvent.VK_T))
+				if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_T))
 				{
 					//testing the player getting healed
 					int hp = CoreClass.mainCharacter.getHitpoints();
@@ -882,7 +705,7 @@ public class MovementManager extends Thread
 				}
 				
 				
-				if(CoreClass.InCa.isKeyDown(KeyEvent.VK_P))
+				if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_P))
 				{
 					
 					//pause the game
@@ -890,7 +713,7 @@ public class MovementManager extends Thread
 				}
 				
 				
-				if(CoreClass.InCa.isKeyDown(KeyEvent.VK_SPACE) && attack == 0)
+				if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_SPACE) && attack == 0)
 				{
 					
 					//System.out.println(attack+"Attack"+CoreClass.mainCharacter.getDirection());
@@ -904,7 +727,7 @@ public class MovementManager extends Thread
 				if(WhenShitHits.rightHitSetpiece())
 				{
 					
-					if(CoreClass.InCa.isKeyDown(KeyEvent.VK_RIGHT))
+					if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D))
 					{
 						//System.out.println("p");
 						
@@ -954,7 +777,7 @@ public class MovementManager extends Thread
 				if(WhenShitHits.leftHitSetpiece())
 				{
 				
-					if(CoreClass.InCa.isKeyDown(KeyEvent.VK_LEFT))
+					if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A))
 					{
 						
 						
@@ -1001,7 +824,7 @@ public class MovementManager extends Thread
 					
 				if(WhenShitHits.upHitSetpiece())	
 				{	
-					if(CoreClass.InCa.isKeyDown(KeyEvent.VK_UP))
+					if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W))
 					{
 						//System.out.println("h");
 							
@@ -1050,7 +873,7 @@ public class MovementManager extends Thread
 				if(WhenShitHits.downHitSetpiece())
 				{
 					
-					if(CoreClass.InCa.isKeyDown(KeyEvent.VK_DOWN))
+					if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S))
 					{
 						//System.out.println("ha");
 						
@@ -1172,7 +995,7 @@ public class MovementManager extends Thread
 					try
 					{
 						
-						Thread.sleep(20);
+						Thread.sleep(25);
 						
 					} 
 					catch (InterruptedException e)

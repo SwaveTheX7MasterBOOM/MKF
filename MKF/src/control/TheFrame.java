@@ -35,7 +35,7 @@ public class TheFrame extends JFrame
 		r = new Renderer();
 		
 		this.getContentPane().add(r);
-		this.addKeyListener(CoreClass.InCa);
+		this.addKeyListener(CoreClass.KeyIn);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);

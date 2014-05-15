@@ -3,7 +3,7 @@ package control;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
+
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,12 +15,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import physicalGameObjects.MeleeEnemy;
+
 import physicalGameObjects.Player;
 
 import logicalGameObjects.Coordinate;
 import logicalGameObjects.Enemy;
-import logicalGameObjects.HealthBar;
 import logicalGameObjects.Setpiece;
 
 
@@ -46,10 +45,12 @@ public class Renderer extends JPanel implements ActionListener
 	{
 		
 		this.setFocusable(true);
+		this.addMouseListener(CoreClass.mightyMouse);
+		this.addMouseMotionListener(CoreClass.mightyMouse);
 		
 			tempus = new Timer(1, this);
 
-				this.addKeyListener(CoreClass.InCa);
+				this.addKeyListener(CoreClass.KeyIn);
 			
 					tempus.start();	
 
@@ -61,7 +62,7 @@ public class Renderer extends JPanel implements ActionListener
 	 */
 	public void actionPerformed(ActionEvent arg0)
 	{	
-		
+
 		repaint();
 		
 	}

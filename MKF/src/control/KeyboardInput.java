@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
  * 
  * @author The Internet 
  **/
-public final class InputCatcher extends KeyAdapter
+public final class KeyboardInput extends KeyAdapter
 {	
 	
 	//I did not write the class, I found in on the Internet searching for an example of a polling system if I find the site again I will credit the author.
@@ -31,19 +31,19 @@ public final class InputCatcher extends KeyAdapter
 		private String keyCache = "";
 		
 		//the only instantiated object
-		private static InputCatcher instance = new InputCatcher();
+		private static KeyboardInput instance = new KeyboardInput();
 		
 		/**
 		 * Empty Constructor: nothing really needed here.
 		 */
-		protected InputCatcher() {
+		protected KeyboardInput() {
 		}
 
 		/**
 		 * Singleton accessor the only means of getting the instantiated object.
 		 * @return One and only InputManager object.
 		 */
-		public static InputCatcher getInstance() {
+		public static KeyboardInput getInstance() {
 			return instance;
 		}
 		

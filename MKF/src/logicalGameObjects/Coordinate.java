@@ -1,5 +1,9 @@
 package logicalGameObjects;
 
+import java.awt.Point;
+
+
+
 
 
 
@@ -28,6 +32,16 @@ public class Coordinate
 		
 		this.x = x;
 		this.y = y;
+		
+	}
+	
+	public Coordinate(Point p)
+	{
+		
+		this.x = p.x;
+		this.y = p.y;
+		
+			p = null;
 		
 	}
 

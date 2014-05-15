@@ -1,17 +1,15 @@
 package control;
 
-import java.awt.Image;
+
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import physicalGameObjects.MeleeEnemy;
-import physicalGameObjects.Player;
 
-import logicalGameObjects.Actor;
 import logicalGameObjects.Coordinate;
 import logicalGameObjects.Enemy;
 import logicalGameObjects.PlatformObjects;
@@ -255,7 +253,7 @@ public class WhenShitHits
 						else//if it can move through the object
 						{	
 							//if one of the directional keys is being pressed
-							if(CoreClass.InCa.isKeyDown(KeyEvent.VK_DOWN) || CoreClass.InCa.isKeyDown(KeyEvent.VK_UP) || CoreClass.InCa.isKeyDown(KeyEvent.VK_LEFT) || CoreClass.InCa.isKeyDown(KeyEvent.VK_RIGHT))
+							if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A))
 							{
 									
 								((Setpiece) s).collision();
@@ -331,7 +329,7 @@ public class WhenShitHits
 						else
 						{
 								
-							if(CoreClass.InCa.isKeyDown(KeyEvent.VK_DOWN) || CoreClass.InCa.isKeyDown(KeyEvent.VK_UP) || CoreClass.InCa.isKeyDown(KeyEvent.VK_LEFT) || CoreClass.InCa.isKeyDown(KeyEvent.VK_RIGHT))
+							if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A))
 							{
 									
 								((Setpiece) s).collision();
@@ -407,7 +405,7 @@ public class WhenShitHits
 						else
 						{
 							
-							if(CoreClass.InCa.isKeyDown(KeyEvent.VK_DOWN) || CoreClass.InCa.isKeyDown(KeyEvent.VK_UP) || CoreClass.InCa.isKeyDown(KeyEvent.VK_LEFT) || CoreClass.InCa.isKeyDown(KeyEvent.VK_RIGHT))
+							if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A))
 							{
 									
 								((Setpiece) s).collision();
@@ -483,7 +481,7 @@ public class WhenShitHits
 							else
 							{
 								
-								if(CoreClass.InCa.isKeyDown(KeyEvent.VK_DOWN) || CoreClass.InCa.isKeyDown(KeyEvent.VK_UP) || CoreClass.InCa.isKeyDown(KeyEvent.VK_LEFT) || CoreClass.InCa.isKeyDown(KeyEvent.VK_RIGHT))
+								if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A))
 								{
 										
 									((Setpiece) s).collision();

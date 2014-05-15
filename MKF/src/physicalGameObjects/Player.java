@@ -3,6 +3,7 @@ package physicalGameObjects;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
@@ -12,9 +13,9 @@ import logicalGameObjects.Coordinate;
 import control.CoreClass;
 
 
-
 /**@author Andy Rodriguez **/
-public class Player implements Actor {
+public class Player implements Actor
+{
 
 	//image of the player
 	private Image pic;
@@ -28,8 +29,11 @@ public class Player implements Actor {
 	//player's defense level
 	private int defense;
 	
-	//player's speed
+	//player's current speed
 	private int speed;
+	
+	//Unmodified speed value
+	private final int baseSpeed = 1;
 	
 	//player's "on screen" x position
 	private int xPos;
@@ -73,13 +77,15 @@ public class Player implements Actor {
 	//what direction the player is facing
 	private int direction; 
 	
-	
-	
-	
 	//not used atm, for platform mode
 	public static boolean isFalling = false;	
 	
-	Coordinate actualCenter;
+	//center of the players actual position on the map
+	private Coordinate actualCenter;
+	
+	//how loud the player is being
+	private int decibelLevel = 0;
+	
 
 	
 	//CONSTRUCTOR new player
@@ -89,7 +95,7 @@ public class Player implements Actor {
 		
 		attack = 20;
 		defense = 20;
-		speed = 1;
+		speed = baseSpeed;
 		xPos = x;
 		yPos = y;
 		direction = 5;
@@ -102,6 +108,7 @@ public class Player implements Actor {
 		
 		//set to 100 for now -- testing
 		hitpoints = 100;
+		
 	}
 	
 	
@@ -212,7 +219,33 @@ public class Player implements Actor {
 	 * Returns the enemy's current speed
 	 * @return speed
 	 */
-	public int getSpeed() {	return speed;	}
+	public synchronized int getSpeed()
+	{	
+		
+		int tileMod = 1;
+		int runMod = 0;
+
+			//on path tile or not
+			if((CoreClass.getCurrentLevel().getMap()[getActualCenter().getY()/102][getActualCenter().getX()/102]) != 1)
+			{
+				
+				tileMod = 2;
+				
+			}
+
+			
+			
+			if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_SHIFT) == true)
+			{
+				
+				runMod = 1;
+				
+			}
+
+			//System.out.println(speed * tileMod + runMod);
+			return speed * tileMod + runMod;
+		
+	}
 	
 	/**
 	 * Sets the enemy's speed
@@ -275,24 +308,6 @@ public class Player implements Actor {
 		this.hitbox = hitbox;
 	}
 
-
-
-	/*public Rectangle getBox() {
-		
-		box = new Rectangle(xPos, yPos + pic.getHeight(null) - 5, 5, pic.getWidth(null));
-		
-		return box;
-	}
-
-
-
-	public void setBox(Rectangle box) {
-		this.box = box;
-	}	
-*/
-
-
-	
 	/**
 	 * get the northern hit box of characters melee attack
 	 * 
@@ -832,6 +847,42 @@ public class Player implements Actor {
 		
 		 	return actualCenter;
 		
+	}
+
+	/**
+	 * get the int value representation of how loud the player is being as they move around the map
+	 * 
+	 * @return int 
+	 */
+	public int getDecibelLevel()
+	{
+		//movement modification
+		int moveMod = 0;
+		
+			//walking
+			if((CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A)) && (CoreClass.KeyIn.isKeyDown(KeyEvent.VK_SHIFT) == false))
+			{
+				
+				moveMod = 100;
+				
+			}
+			else if((CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A)) && (CoreClass.KeyIn.isKeyDown(KeyEvent.VK_SHIFT) == true))
+			{//running
+				
+				moveMod = 200;
+				
+			}
+			
+				return decibelLevel + moveMod;
+		
+	}
+
+	/**
+	 * set the decibel level
+	 * @param decibelLevel - int
+	 */
+	public void setDecibelLevel(int decibleLevel) {
+		this.decibelLevel = decibleLevel;
 	}
 
 }

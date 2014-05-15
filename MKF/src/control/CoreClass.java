@@ -9,7 +9,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import physicalGameObjects.JungleLevel;
-import physicalGameObjects.MeleeEnemy;
 import physicalGameObjects.Player;
 
 import logicalGameObjects.Camera;
@@ -68,7 +67,10 @@ public class CoreClass
 	public static Coordinate mapUpperLeftOffset = new Coordinate(0,0);
 	
 	//catches input from the keyboard
-	public static InputCatcher InCa = new InputCatcher();
+	public static KeyboardInput KeyIn = KeyboardInput.getInstance();
+	
+	//catches input from the mouse, clicks and movement
+	public static MouseMethods mightyMouse = MouseMethods.getInstance();
 	
 	//health bar
 	public static HealthBar healthBar = new HealthBar();
