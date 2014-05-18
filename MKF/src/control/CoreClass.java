@@ -1,6 +1,7 @@
 package control;
 
 
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,6 +79,9 @@ public class CoreClass
 	//for thread safety
 	private ExecutorService es;
 
+	//
+	public static Toolkit coolkit = Toolkit.getDefaultToolkit();
+	
 	
 	/**
 	 * New game constructor
@@ -100,7 +104,7 @@ public class CoreClass
 
 				es.execute(new Thread(new MovementManager()));
 				es.execute(new Thread(new EnemyManagment()));
-				
+				es.execute(mightyMouse);
 					es.shutdown();
 			
 

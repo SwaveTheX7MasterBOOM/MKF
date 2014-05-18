@@ -1,5 +1,11 @@
 package control;
 
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 
@@ -27,6 +33,14 @@ public class TheFrame extends JFrame
 	 */
 	public TheFrame()
 	{
+		
+
+	    
+		
+		this.setCursor(CoreClass.coolkit.createCustomCursor(new ImageIcon("src/images/CC8.png").getImage(), new Point(0,0), "Cursor"));
+		
+		
+		
   
 		this.setVisible(true);
 

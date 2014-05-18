@@ -44,6 +44,16 @@ public class Coordinate
 			p = null;
 		
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Point getPoint()
+	{
+		return new Point(x, y);
+		
+	}
 
 	/**
 	 * get the x axis coordinate

@@ -1,5 +1,7 @@
 package control;
 
+import logicalGameObjects.Coordinate;
+
 
 public class Mathariffic
 {
@@ -26,6 +28,19 @@ public class Mathariffic
 			return (GCF (b, a % b));
 			
 		}
+		
+	}
+	
+	public static double angleBetween2Coordinates(Coordinate one, Coordinate two)
+	{
+		
+		
+		double xDiff = two.getX() - one.getX(); 
+		double yDiff = two.getY() - one.getY();
+		
+		return Math.toDegrees(Math.atan2(yDiff, xDiff));
+		
+			
 		
 	}
 
