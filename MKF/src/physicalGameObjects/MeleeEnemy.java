@@ -10,7 +10,6 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
-import logicalGameObjects.Actor;
 import logicalGameObjects.Coordinate;
 import logicalGameObjects.Enemy;
 

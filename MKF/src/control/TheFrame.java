@@ -1,9 +1,7 @@
 package control;
 
-import java.awt.Cursor;
-import java.awt.Image;
+
 import java.awt.Point;
-import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -34,14 +32,6 @@ public class TheFrame extends JFrame
 	public TheFrame()
 	{
 		
-
-	    
-		
-		this.setCursor(CoreClass.coolkit.createCustomCursor(new ImageIcon("src/images/CC8.png").getImage(), new Point(0,0), "Cursor"));
-		
-		
-		
-  
 		this.setVisible(true);
 
 		this.createBufferStrategy(2);
@@ -51,8 +41,8 @@ public class TheFrame extends JFrame
 		this.getContentPane().add(r);
 		this.addKeyListener(CoreClass.KeyIn);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setCursor(CoreClass.coolkit.createCustomCursor(new ImageIcon("src/images/CC8.png").getImage(), new Point(0,0), "Cursor"));
 		
 	}
 

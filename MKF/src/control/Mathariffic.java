@@ -31,16 +31,23 @@ public class Mathariffic
 		
 	}
 	
+	/**
+	 * get the angel between two points
+	 * 
+	 * see diagram in the drive for a visual representation of angels and their corresponding cardinal direction
+	 * 
+	 * @param one - Coordinate, first one to compare
+	 * @param two - Coordinate, second one to compare
+	 * 
+	 * @return double - the angle between the two points
+	 */
 	public static double angleBetween2Coordinates(Coordinate one, Coordinate two)
 	{
-		
-		
+			
 		double xDiff = two.getX() - one.getX(); 
 		double yDiff = two.getY() - one.getY();
 		
 		return Math.toDegrees(Math.atan2(yDiff, xDiff));
-		
-			
 		
 	}
 

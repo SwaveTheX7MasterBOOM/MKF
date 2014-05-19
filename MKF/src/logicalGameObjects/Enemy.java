@@ -3,7 +3,7 @@ package logicalGameObjects;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.util.Random;
+
 
 /**@author Andy Rodriguez **/
 public abstract class Enemy implements Actor

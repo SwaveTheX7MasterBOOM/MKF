@@ -46,8 +46,23 @@ public class Coordinate
 	}
 	
 	/**
+	 * change x and y values at the same time
 	 * 
-	 * @return
+	 * @param x - int, new x axis value
+	 * @param y - int, new y axis value
+	 */
+	public void update(int x, int y)
+	{
+		
+		this.x = x;
+		this.y = y;
+		
+	}
+	
+	/**
+	 * turns the info stored in this object into a java Point object
+	 * 
+	 * @return Point object
 	 */
 	public Point getPoint()
 	{
