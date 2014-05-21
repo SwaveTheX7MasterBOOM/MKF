@@ -14,6 +14,7 @@ import physicalGameObjects.Player;
 
 import logicalGameObjects.Camera;
 import logicalGameObjects.Coordinate;
+import logicalGameObjects.CursorCompanion;
 import logicalGameObjects.Enemy;
 import logicalGameObjects.HealthBar;
 import logicalGameObjects.Levels;
@@ -102,9 +103,9 @@ public class CoreClass
 		
 		es = Executors.newCachedThreadPool();
 
-				es.execute(new Thread(new MovementManager()));
-				es.execute(new Thread(new EnemyManagment()));
-				es.execute(mightyMouse);
+				es.execute(new MovementManager());
+				es.execute(new EnemyManagment());
+				es.execute(new CursorCompanion());
 					es.shutdown();
 			
 
