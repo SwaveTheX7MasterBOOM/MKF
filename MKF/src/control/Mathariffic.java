@@ -51,4 +51,14 @@ public class Mathariffic
 		
 	}
 
+	public static double distanceBetween2Coordinates(Coordinate one, Coordinate two)
+	{
+
+		double xDiff = Math.pow((two.getX() - one.getX()), 2); 
+		double yDiff = Math.pow((two.getY() - one.getY()), 2);
+		
+		return Math.sqrt((xDiff + yDiff));
+		
+	}
+
 }

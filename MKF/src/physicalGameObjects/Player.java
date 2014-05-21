@@ -838,7 +838,7 @@ public class Player implements Actor
 
 
 	/**
-	 * 
+	 * uses logical map position not on screen position
 	 */
 	public Coordinate getActualCenter()
 	{
