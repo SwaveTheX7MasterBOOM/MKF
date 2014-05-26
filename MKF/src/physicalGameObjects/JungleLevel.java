@@ -154,6 +154,12 @@ public class JungleLevel implements Levels
 			
 		}
 		
+		//create bombs
+		for(int x = 0; x < 10; x++)
+		{
+			allObjects.add(new Bomb(x + 1));	
+		}
+		
 	}
 	
 	/**

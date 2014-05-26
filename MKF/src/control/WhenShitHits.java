@@ -255,12 +255,16 @@ public class WhenShitHits
 							//if one of the directional keys is being pressed
 							if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A))
 							{
-									
-								((Setpiece) s).collision();
+								
+								if(s.isExplosive()){
+									((Setpiece) s).explode();
+								} else {
+									((Setpiece) s).collision();
+								}
 								
 							}
 								
-								return true;
+							return true;
 								
 						}
 						
@@ -332,7 +336,11 @@ public class WhenShitHits
 							if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A))
 							{
 									
-								((Setpiece) s).collision();
+								if(s.isExplosive()){
+									((Setpiece) s).explode();
+								} else {
+									((Setpiece) s).collision();
+								}
 								
 							}
 								
@@ -408,7 +416,11 @@ public class WhenShitHits
 							if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A))
 							{
 									
-								((Setpiece) s).collision();
+								if(s.isExplosive()){
+									((Setpiece) s).explode();
+								} else {
+									((Setpiece) s).collision();
+								}
 								
 							}
 							
@@ -484,7 +496,11 @@ public class WhenShitHits
 								if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A))
 								{
 										
-									((Setpiece) s).collision();
+									if(s.isExplosive()){
+										((Setpiece) s).explode();
+									} else {
+										((Setpiece) s).collision();
+									}
 									
 								}
 									
