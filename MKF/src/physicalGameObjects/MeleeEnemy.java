@@ -1304,7 +1304,7 @@ public class MeleeEnemy extends Enemy {
 	public void aI()
 	{
 			
-			Object[] see = WhenShitHits.sightTest();
+			Object[] see = WhenShitHits.sightTest(this);
 
 			if(alerted == 0)
 			{
