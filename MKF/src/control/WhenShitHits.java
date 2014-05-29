@@ -10,6 +10,7 @@ import java.util.List;
 
 import physicalGameObjects.MeleeEnemy;
 
+import logicalGameObjects.Actor;
 import logicalGameObjects.Coordinate;
 import logicalGameObjects.Enemy;
 import logicalGameObjects.PlatformObjects;
@@ -1234,8 +1235,10 @@ public class WhenShitHits
 	 * 
 	 * @return Object[]
 	 */
-	public static Object[] sightTest()
-	{
+	public static Object[] sightTest(Actor JohnBelushi)
+	{//get sight, get actor objects, test collition, return objects
+		
+		
 		 return null;
 	}
 	
@@ -1246,7 +1249,9 @@ public class WhenShitHits
 	 */
 	public static boolean hearingTest()
 	{
+		//what objects do i grab to test, actors obviously, but it's possible that setpieces will produce sound when i play make contact with them. possible: boolean, test all on screen objects
 		 return false;
+		 
 	}
 	
 	
