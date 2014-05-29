@@ -3,6 +3,8 @@ package control;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
+import java.awt.Rectangle;
 
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
@@ -296,7 +298,10 @@ public class Renderer extends JPanel implements ActionListener
 		        //draw the character
 		        g.drawImage(CoreClass.mainCharacter.getPic(), CoreClass.mainCharacter.getxPos(), CoreClass.mainCharacter.getyPos(), null);
 		        
-		   /*     g.setColor(Color.BLACK);
+		    /*     g.setColor(Color.BLACK);
+		       g.fillPolygon(CoreClass.mainCharacter.getSoundObject());
+		        
+		       g.setColor(Color.BLACK);
 		        g.fillPolygon(CoreClass.mainCharacter.getEastAttackBox());
 		       g.fillPolygon(CoreClass.mainCharacter.getNorthAttackBox());
 		        g.fillPolygon(CoreClass.mainCharacter.getSouthAttackBox());
@@ -339,8 +344,13 @@ public class Renderer extends JPanel implements ActionListener
 			}
 			else if(s instanceof Enemy)
 			{
-				//System.out.println("painting enimy");
+		
 				g.drawImage(((Enemy) s).getPic(), ((Enemy) s).getxPos()  + cameraOffX - (tempUL.getX() * 102), ((Enemy) s).getyPos() + cameraOffY - (tempUL.getY() * 102), null);
+				
+				
+			/*	g.setColor(Color.BLUE);
+				g.fillPolygon(((Enemy) s).getseeingBox());*/
+				
 				
 			/*	g.setColor(Color.BLUE);
 				g.fillPolygon(((Enemy) s).getUpBox());

@@ -5,6 +5,7 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -98,23 +99,22 @@ public class MeleeEnemy extends Enemy {
 	private Image[] west;
 	private Image[] northWest;
 	
-	//sight and hearing collision boxes
-	private Polygon hearingBox;
+	//sight collision box
 	private Polygon seeingBox;
 	
 	//center point of the characters actual position
 	private Coordinate actualCenter;
 	
-	//how large the hearing and sight collisions objects will be
-	private int sightRange;
-	private int hearingRange;
+	//how large the sight collision object will be
+	private int sightRange = 600;
+
 
 	//if the character has been heard
 	private boolean heard = false;
 	
 	// how many times the character may look around after hearing something before resuming normal search pattern
 	//IDEA:  add functionality to up the number times this character looks around and shorten the duration they take looking in that direction to simulate jumpiness
-	private int alerted = 3;
+	private int alerted = 0;
 	
 	//prevent actions being taken till timer is up
 	private boolean stopAndLook = false;
@@ -148,7 +148,7 @@ public class MeleeEnemy extends Enemy {
 		speed = 1;
 		xPos = x;
 		yPos = y;
-		direction = 0;
+		direction = 5;
 		hitbox = new Rectangle(xPos - (pic.getWidth(null)/3), yPos, pic.getWidth(null)+((2*pic.getWidth(null))/3), pic.getHeight(null));	
 		
 	intendedDirection = dir;
@@ -262,10 +262,12 @@ public class MeleeEnemy extends Enemy {
 	}	
 
 	/**
-	 * Returns the enemy's side to side hitbox
+	 * Returns the characters hitbox
 	 * @return hitbox
 	 */
 	public Rectangle getHitbox() {
+		hitbox = new Rectangle(xPos, yPos, pic.getWidth(null), pic.getHeight(null));
+		
 		return hitbox;
 	}
 
@@ -1304,23 +1306,49 @@ public class MeleeEnemy extends Enemy {
 	public void aI()
 	{
 			
-			Object[] see = WhenShitHits.sightTest(this);
+			List<Object> see = WhenShitHits.sightTest(this);
 
 			if(alerted == 0)
 			{
-			heard = WhenShitHits.hearingTest();
+			heard = WhenShitHits.hearingTest(this);
 			}	
 			
 				//*i don't see anyone nor do i hear anything moving in the distance*
-				if(see == null && heard == false)
+				if(see.size() == 0 && heard == false)
 				{
 				
 					EnemyAI.searchCL(this);
 		
 				}
-				else if(see == null && heard == true)//hear something moving near me
+				else if(see.size() > 0)//*i see something*
 				{
+					System.out.println("I see you");
+					//chase
 					
+					/*Actor temp;
+					 * 
+					 * for(see:Object o)
+					 * {
+					 * 
+					 * if(o instanceOf Player)
+					 * {
+					 * 
+					 * }
+					 * else if()
+					 * {
+					 * 
+					 * 
+					 * }
+					 * 
+					 * 
+					 * }
+					 * EnemyAI.pathTo(this,temp);
+					 */
+					
+				}	
+				else if(see.size() == 0 && heard == true)//hear something moving near me
+				{
+					System.out.println("I hear you");
 					//*look around*
 					/*
 					 if(stopAndLook == false)
@@ -1346,38 +1374,12 @@ public class MeleeEnemy extends Enemy {
 	
 					
 					*/
-				}	
-				else if(see != null)//*i see something*
-				{
-					
-					//chase
-					
-					/*Actor temp;
-					 * 
-					 * for(see:Object o)
-					 * {
-					 * 
-					 * if(o instanceOf Player)
-					 * {
-					 * 
-					 * }
-					 * else if()
-					 * {
-					 * 
-					 * 
-					 * }
-					 * 
-					 * 
-					 * }
-					 * EnemyAI.pathTo(this,temp);
-					 */
-					
-				}	
+				}
 				
 	}
 		
 	
-	
+
 
 	/**
 	 * 
@@ -1489,29 +1491,6 @@ public class MeleeEnemy extends Enemy {
 		
 	}
 
-	/**
-	 * get the hearing collision box
-	 * 
-	 * @return Polygon
-	 */
-	public Polygon gethearingBox()
-	{
-		
-		return hearingBox;
-		
-	}
-
-	/**
-	 * set the hearing collision box
-	 * 
-	 * @param Polygon
-	 */
-	public void sethearingBox(Polygon hearingBox)
-	{
-		
-		this.hearingBox = hearingBox;
-		
-	}
 
 	/**
 	 * get the seeing collision box
@@ -1521,7 +1500,86 @@ public class MeleeEnemy extends Enemy {
 	public Polygon getseeingBox()
 	{
 		
-		return seeingBox;
+		int tempX[] = null;
+		int tempY[] = null;
+		
+		int temp = (int) (sightRange * 0.25);
+		Coordinate aC = getActualCenter();
+		int aCx = aC.getX();
+		int aCy = aC.getY();
+		
+		
+		
+			switch(direction)
+			{
+			
+				case 1:
+					
+						tempX = new int[]{aCx, (aCx + temp), (aCx - temp)};
+						tempY = new int[]{aCy, (aCy - sightRange), (aCy - sightRange)};
+					
+					break;
+					
+				case 2:
+					
+						tempX = new int[]{aCx, (aCx + (sightRange / 2)), (aCx + sightRange)};
+						tempY = new int[]{aCy, (aCy - sightRange), (aCy - (sightRange / 2))};
+					
+					break;
+					
+				case 3:
+					
+						tempX = new int[]{aCx, (aCx + sightRange), (aCx + sightRange)};
+						tempY = new int[]{aCy, (aCy + temp), (aCy - temp)};
+					
+					break;
+					
+				case 4:
+					
+						tempX = new int[]{aCx, (aCx + (sightRange / 2)), (aCx + sightRange)};
+						tempY = new int[]{aCy, (aCy + sightRange), (aCy + (sightRange / 2))};
+					
+					break;
+					
+				case 5:
+					
+						tempX = new int[]{aCx, (aCx + temp), (aCx - temp)};
+						tempY = new int[]{aCy, (aCy + sightRange), (aCy + sightRange)};
+					
+					break;
+					
+				case 6:
+					
+						tempX = new int[]{aCx, (aCx - (sightRange / 2)), (aCx - sightRange)};
+						tempY = new int[]{aCy, (aCy + sightRange), (aCy + (sightRange / 2))};
+					
+					break;
+					
+				case 7:
+					
+						tempX = new int[]{aCx, (aCx - sightRange), (aCx - sightRange)};
+						tempY = new int[]{aCy, (aCy + temp), (aCy - temp)};
+					
+					break;
+					
+				case 8:
+					
+						tempX = new int[]{aCx, (aCx - (sightRange / 2)), (aCx - sightRange)};
+						tempY = new int[]{aCy, (aCy - sightRange), (aCy - (sightRange / 2))};
+					
+					break;
+					
+				default:
+					
+						System.out.println(direction+" we have not directin");
+					
+					break;
+			
+			}
+
+				seeingBox = new Polygon(tempX, tempY, 3);
+					
+					return seeingBox;
 		
 	}
 
@@ -1554,26 +1612,6 @@ public class MeleeEnemy extends Enemy {
 	{
 		
 		this.sightRange = sightRange;
-		
-	}
-
-	/**
-	 * get how far the character can hear
-	 */
-	public int getHearingRange()
-	{
-		
-		return hearingRange;
-		
-	}
-
-	/**
-	 * set how far the character can hear
-	 */
-	public void setHearingRange(int hearingRange)
-	{
-		
-		this.hearingRange = hearingRange;
 		
 	}
 

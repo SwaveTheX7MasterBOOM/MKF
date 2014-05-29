@@ -3,10 +3,13 @@ package control;
 
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Area;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import physicalGameObjects.MeleeEnemy;
 
@@ -1235,11 +1238,44 @@ public class WhenShitHits
 	 * 
 	 * @return Object[]
 	 */
-	public static Object[] sightTest(Actor JohnBelushi)
+	public static List<Object> sightTest(Enemy JohnBelushi)
 	{//get sight, get actor objects, test collition, return objects
+	
+		//all the objects I see
+		List<Object> foundYou = new ArrayList<Object>();
 		
+		//if you see the main character
+		if(JohnBelushi.getseeingBox().intersects(CoreClass.mainCharacter.getHitbox()))
+		{
+			
+			foundYou.add(CoreClass.mainCharacter);
+			
+		}
+		else
+		{
+			
+			List<Enemy> watchingYou = new ArrayList<Enemy>();
+			
+				watchingYou.addAll(CoreClass.getAllEn());
+				watchingYou.remove(JohnBelushi);
+				
+				
+				for(Enemy i:watchingYou)
+				{
+					
+					if( JohnBelushi.getseeingBox().intersects(i.getHitbox()))
+					{
+						
+						foundYou.add(i);
+						
+					}
+					
+				}
+		}
+
 		
-		 return null;
+		 return foundYou;
+		 
 	}
 	
 	/**
@@ -1247,11 +1283,37 @@ public class WhenShitHits
 	 * 
 	 * @return
 	 */
-	public static boolean hearingTest()
+	public static boolean hearingTest(Enemy seanConnery)
 	{
 		//what objects do i grab to test, actors obviously, but it's possible that setpieces will produce sound when i play make contact with them. possible: boolean, test all on screen objects
-		 return false;
+		
+		if(CoreClass.mainCharacter.getSoundObject().intersects(seanConnery.getHitbox()))
+		{
+			return true;
+		}
+		
+			return false;
 		 
+	}
+	
+	/**
+	 * check the intersection of two polygon objects
+	 * NOT USED ATM but figured it might come in handy later
+	 * 
+	 * @param a - Shape object to be compared
+	 * @param b - Shape object to be compared
+	 * 
+	 * @return boolean - if intersection has occurred
+	 */
+	public static boolean intersectionOf2Shapes(Shape a, Shape b)
+	{
+		
+		   Area areaA = new Area(a);
+		   
+		   		areaA.intersect(new Area(b));
+		   
+		   			return !areaA.isEmpty();
+	
 	}
 	
 	

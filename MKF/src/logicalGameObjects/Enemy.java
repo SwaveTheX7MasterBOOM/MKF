@@ -132,20 +132,8 @@ public abstract class Enemy implements Actor
 	/** set how far the character can see */
 	public abstract void setSightRange(int sightRange);
 	
-	/** get how far the character can hear */
-	public abstract int getHearingRange();
-	
-	/** set how far the character can hear */
-	public abstract void setHearingRange(int hearingRange);
-	
 	/** get the center position of the characters actual position **/
 	public abstract Coordinate getActualCenter(); 
-	
-	/** get the hearing collision box **/
-	public abstract Polygon gethearingBox();
-	
-	/** set the hearing collision box **/
-	public abstract void sethearingBox(Polygon hearingBox);
 	
 	/** get the sight collision box **/
 	public abstract Polygon getseeingBox();

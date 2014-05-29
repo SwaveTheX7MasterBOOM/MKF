@@ -61,6 +61,8 @@ public class Player implements Actor
 	private Polygon westAttackBox;
 	private Polygon northWestAttackBox;
 	
+	private Polygon soundObject;
+	
 	//walking animations
 	private Image[] north;
 	private Image[] northEast;
@@ -100,7 +102,7 @@ public class Player implements Actor
 		yPos = y;
 		direction = 5;
 		
-		hitbox = new Rectangle(xPos - (pic.getWidth(null)/3), yPos, pic.getWidth(null)+((2*pic.getWidth(null))/3), pic.getHeight(null));	
+	
 		
 		
 		mapX = x;
@@ -293,10 +295,11 @@ public class Player implements Actor
 	}	
 
 	/**
-	 * Returns the enemy's side to side hitbox
+	 * Returns the characters hitbox
 	 * @return hitbox
 	 */
 	public Rectangle getHitbox() {
+		hitbox = new Rectangle(xPos, yPos, pic.getWidth(null), pic.getHeight(null));	
 		return hitbox;
 	}
 
@@ -863,13 +866,13 @@ public class Player implements Actor
 			if((CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A)) && (CoreClass.KeyIn.isKeyDown(KeyEvent.VK_SHIFT) == false))
 			{
 				
-				moveMod = 100;
+				moveMod = 300;
 				
 			}
 			else if((CoreClass.KeyIn.isKeyDown(KeyEvent.VK_S) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_W) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_D) || CoreClass.KeyIn.isKeyDown(KeyEvent.VK_A)) && (CoreClass.KeyIn.isKeyDown(KeyEvent.VK_SHIFT) == true))
 			{//running
 				
-				moveMod = 200;
+				moveMod = 500;
 				
 			}
 			
@@ -884,8 +887,27 @@ public class Player implements Actor
 	public void setDecibelLevel(int decibleLevel) {
 		this.decibelLevel = decibleLevel;
 	}
+	
+	/**
+	 * polygon object representing how far away the noise the character makes travels
+	 * 
+	 * @return
+	 */
+	public Polygon getSoundObject()
+	{
+		
+		int temp = ((int) (getDecibelLevel() * 0.75));
+		Coordinate aC = getActualCenter();
+		int aCx = aC.getX();
+		int aCy = aC.getY();
+		
+			int tempX[] = {(aCx), (aCx + temp), (aCx + getDecibelLevel()), (aCx + temp), (aCx), (aCx - temp), (aCx - getDecibelLevel()), (aCx - temp)};
+			int tempY[] = {(aCy - getDecibelLevel()), (aCy - temp), (aCy), (aCy + temp), (aCy + getDecibelLevel()), (aCy + temp), (aCy), (aCy - temp)};
+		
+				soundObject = new Polygon(tempX, tempY, 8);
+		
+		return soundObject;
+		
+	}
 
 }
-
-
-

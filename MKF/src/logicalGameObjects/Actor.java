@@ -2,6 +2,8 @@ package logicalGameObjects;
 
 import java.awt.Image;
 import java.awt.Polygon;
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 
 public interface Actor {
 	
@@ -225,6 +227,13 @@ public interface Actor {
 	 * @param rightBox
 	 */
 	public void setRightBox(Polygon rightBox);
+	
+	/**
+	 * get rectangle object with the bounds of the characters image
+	 * 
+	 * @return rectangle 
+	 */
+	public Rectangle getHitbox();
 	
 	
 }
