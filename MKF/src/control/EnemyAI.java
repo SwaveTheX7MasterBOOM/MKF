@@ -322,15 +322,87 @@ public class EnemyAI
 	}
 	
 	/**
-	 * NOT IN USE
+	 * 
+	 * 
+	 * 
 	 * 
 	 * @param billMurray
 	 * @param scarlettJohansson
 	 */
 	public static void pathTo(Actor billMurray, Actor scarlettJohansson)
-	{
-		
-		
+	{	
+	
+		String s = Magellon.findCardinalDirection(Mathariffic.angleBetween2Coordinates(billMurray.getActualCenter(), scarlettJohansson.getActualCenter()));
+
+
+			switch(s)
+			{
+
+				case "north":
+
+						billMurray.moveNorth();
+
+					break;
+
+				case "northNorthEast":
+
+				case "northEast":
+
+				case "northEastEast":
+
+						billMurray.moveNorthEast();
+
+					break;
+
+				case "east":
+
+						billMurray.moveEast();
+
+					break;
+
+				case "southEastEast":
+
+				case "southEast":
+
+				case "southSouthEast":
+
+						billMurray.moveSouthEast();
+
+					break;
+
+				case "south":
+
+						billMurray.moveSouth();
+
+					break;
+
+				case "southSouthWest":
+
+				case "southWest":
+
+				case "southWestWest":
+
+						billMurray.moveSouthWest();
+
+					break;
+
+				case "west":
+
+						billMurray.moveWest();
+
+					break;
+
+				case "northWestWest":
+
+				case "northWest":
+
+				case "northNorthWest":
+
+						billMurray.moveNorthWest();
+
+					break;
+
+			}
 		
 	}
 	

@@ -235,5 +235,15 @@ public interface Actor {
 	 */
 	public Rectangle getHitbox();
 	
+	/** */
+	public void moveNorth();
+	public void moveNorthEast();
+	public void moveEast();
+	public void moveSouthEast();
+	public void moveSouth();
+	public void moveSouthWest();
+	public void moveWest();
+	public void moveNorthWest();
+	
 	
 }

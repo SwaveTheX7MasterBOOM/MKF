@@ -298,6 +298,9 @@ public class Renderer extends JPanel implements ActionListener
 		        //draw the character
 		        g.drawImage(CoreClass.mainCharacter.getPic(), CoreClass.mainCharacter.getxPos(), CoreClass.mainCharacter.getyPos(), null);
 		        
+		        Rectangle r = CoreClass.mainCharacter.getHitbox();
+		       // g.drawRect(r.x, r.y, r.width, r.height);
+		        
 		    /*     g.setColor(Color.BLACK);
 		       g.fillPolygon(CoreClass.mainCharacter.getSoundObject());
 		        
@@ -348,8 +351,8 @@ public class Renderer extends JPanel implements ActionListener
 				g.drawImage(((Enemy) s).getPic(), ((Enemy) s).getxPos()  + cameraOffX - (tempUL.getX() * 102), ((Enemy) s).getyPos() + cameraOffY - (tempUL.getY() * 102), null);
 				
 				
-			/*	g.setColor(Color.BLUE);
-				g.fillPolygon(((Enemy) s).getseeingBox());*/
+				//g.setColor(Color.BLUE);
+				//g.fillPolygon(((Enemy) s).getseeingBox());
 				
 				
 			/*	g.setColor(Color.BLUE);

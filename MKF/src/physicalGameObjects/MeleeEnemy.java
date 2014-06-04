@@ -11,10 +11,12 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
+import logicalGameObjects.Actor;
 import logicalGameObjects.Coordinate;
 import logicalGameObjects.Enemy;
 
 import control.EnemyAI;
+import control.Mathariffic;
 import control.WhenShitHits;
 
 /**@author Andy Rodriguez */
@@ -125,7 +127,7 @@ public class MeleeEnemy extends Enemy {
 		@Override
 		public void actionPerformed(ActionEvent arg0)
 		{
-			//stopAndLook = false;
+			stopAndLook = false;
 			
 		}
 		
@@ -1316,7 +1318,7 @@ public class MeleeEnemy extends Enemy {
 				//*i don't see anyone nor do i hear anything moving in the distance*
 				if(see.size() == 0 && heard == false)
 				{
-				
+					System.out.println("searching");
 					EnemyAI.searchCL(this);
 		
 				}
@@ -1325,39 +1327,52 @@ public class MeleeEnemy extends Enemy {
 					System.out.println("I see you");
 					//chase
 					
-					/*Actor temp;
-					 * 
-					 * for(see:Object o)
-					 * {
-					 * 
-					 * if(o instanceOf Player)
-					 * {
-					 * 
-					 * }
-					 * else if()
-					 * {
-					 * 
-					 * 
-					 * }
-					 * 
-					 * 
-					 * }
-					 * EnemyAI.pathTo(this,temp);
-					 */
+					Actor temp = null;
+					 
+					//the main character is priority, next would be the closest actor in the list
+					 for(Object o:see)
+					 {
+						 int dist = 0;
+					 
+						  if(o instanceof Player)
+						  {
+							  
+							  temp = (Actor) o;
+							  
+							  	break;
+						  
+						  }
+						  else if(o instanceof Enemy)
+						  {
+						  
+							 if(Mathariffic.distanceBetween2Coordinates(this.getActualCenter(), ((Enemy) o).getActualCenter()) > dist)
+							 {
+								 
+								 temp = (Actor) o;
+								 
+							 }
+							
+						  
+						  }
+					  
+					  }
+					  EnemyAI.pathTo(this,temp);
+					 
 					
 				}	
 				else if(see.size() == 0 && heard == true)//hear something moving near me
 				{
 					System.out.println("I hear you");
 					//*look around*
-					/*
+					
 					 if(stopAndLook == false)
 					 {
+						 System.out.println("stop and look = false");
 					 	if(alerted == 0)
 					 	{
 					 		EnemyAI.randomLookAround(this);
 							alerted = r.nextInt(3)+1;
-							stopAndLook == true;
+							stopAndLook = true;
 							turnTimer.start();
 					 	
 					 	}
@@ -1370,10 +1385,11 @@ public class MeleeEnemy extends Enemy {
 					 	
 					 	}
 				
+					 	System.out.println(alerted);
 					}
 	
 					
-					*/
+					
 				}
 				
 	}
@@ -1503,7 +1519,9 @@ public class MeleeEnemy extends Enemy {
 		int tempX[] = null;
 		int tempY[] = null;
 		
-		int temp = (int) (sightRange * 0.25);
+		int temp = (int) (sightRange * 0.75);
+		int temp2 = 10;
+		int temp3 = (int) (sightRange * 0.250);
 		Coordinate aC = getActualCenter();
 		int aCx = aC.getX();
 		int aCy = aC.getY();
@@ -1522,8 +1540,8 @@ public class MeleeEnemy extends Enemy {
 					
 				case 2:
 					
-						tempX = new int[]{aCx, (aCx + (sightRange / 2)), (aCx + sightRange)};
-						tempY = new int[]{aCy, (aCy - sightRange), (aCy - (sightRange / 2))};
+						tempX = new int[]{aCx, (aCx + (sightRange / temp2)), (aCx + sightRange + temp3)};
+						tempY = new int[]{aCy, (aCy - sightRange - temp3), (aCy - (sightRange / temp2))};
 					
 					break;
 					
@@ -1536,8 +1554,8 @@ public class MeleeEnemy extends Enemy {
 					
 				case 4:
 					
-						tempX = new int[]{aCx, (aCx + (sightRange / 2)), (aCx + sightRange)};
-						tempY = new int[]{aCy, (aCy + sightRange), (aCy + (sightRange / 2))};
+						tempX = new int[]{aCx, (aCx + (sightRange / temp2)), (aCx + sightRange + temp3)};
+						tempY = new int[]{aCy, (aCy + sightRange + temp3), (aCy + (sightRange / temp2))};
 					
 					break;
 					
@@ -1550,8 +1568,8 @@ public class MeleeEnemy extends Enemy {
 					
 				case 6:
 					
-						tempX = new int[]{aCx, (aCx - (sightRange / 2)), (aCx - sightRange)};
-						tempY = new int[]{aCy, (aCy + sightRange), (aCy + (sightRange / 2))};
+						tempX = new int[]{aCx, (aCx - (sightRange / temp2)), (aCx - sightRange - temp3)};
+						tempY = new int[]{aCy, (aCy + sightRange + temp3), (aCy + (sightRange / temp2))};
 					
 					break;
 					
@@ -1564,14 +1582,14 @@ public class MeleeEnemy extends Enemy {
 					
 				case 8:
 					
-						tempX = new int[]{aCx, (aCx - (sightRange / 2)), (aCx - sightRange)};
-						tempY = new int[]{aCy, (aCy - sightRange), (aCy - (sightRange / 2))};
+						tempX = new int[]{aCx, (aCx - (sightRange / temp2)), (aCx - sightRange - temp3)};
+						tempY = new int[]{aCy, (aCy - sightRange - temp3), (aCy - (sightRange / temp2))};
 					
 					break;
 					
 				default:
 					
-						System.out.println(direction+" we have not directin");
+						System.out.println(direction+" we have not directi0n");
 					
 					break;
 			

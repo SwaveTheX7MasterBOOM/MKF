@@ -299,7 +299,7 @@ public class Player implements Actor
 	 * @return hitbox
 	 */
 	public Rectangle getHitbox() {
-		hitbox = new Rectangle(xPos, yPos, pic.getWidth(null), pic.getHeight(null));	
+		hitbox = new Rectangle(mapX, mapY, pic.getWidth(null), pic.getHeight(null));	
 		return hitbox;
 	}
 
@@ -846,7 +846,7 @@ public class Player implements Actor
 	public Coordinate getActualCenter()
 	{
 	
-		 actualCenter = new Coordinate(((mapX + 22 + mapX + 3) / 2),((mapY + 44 + mapY + 35) / 2));
+		 actualCenter = new Coordinate(((mapX + 22 + mapX + 3) / 2),((mapY+ 44 + mapY + 35) / 2));
 		
 		 	return actualCenter;
 		
@@ -907,6 +907,68 @@ public class Player implements Actor
 				soundObject = new Polygon(tempX, tempY, 8);
 		
 		return soundObject;
+		
+	}
+
+
+	/*
+	 *added these methods so that we could easily control the main character if we ever needed to.
+	 *no functionality just place holders
+	 *~use Robot class to simulate keypresses
+	 */
+	
+	@Override
+	public void moveNorth() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void moveNorthEast() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void moveEast() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void moveSouthEast() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void moveSouth() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void moveSouthWest() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void moveWest() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void moveNorthWest() {
+		// TODO Auto-generated method stub
 		
 	}
 
