@@ -127,16 +127,38 @@ public class MeleeEnemy extends Enemy {
 		@Override
 		public void actionPerformed(ActionEvent arg0)
 		{
+			
 			stopAndLook = false;
+			
 			
 		}
 		
 	};
 	
-	//how look the character takes looking before moving to the next step
+	//whether to update move to next frame in the animation 
+	private boolean animate = true;
+	
+	//set animate to true after timer run out
+	private ActionListener animationnAL = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0)
+		{
+			
+			animate = true;
+			
+		}
+		
+	};
+	
+	//how long the character takes looking before moving to the next step
 	private Timer turnTimer = new Timer(1000, turnAL);
 	
-
+	//interval between animation frames
+	private int animationInterval = 200;
+	
+	//how long in between the various animation frames
+	private Timer animationTimer = new Timer(animationInterval, animationnAL);
 
 
 
@@ -255,12 +277,16 @@ public class MeleeEnemy extends Enemy {
 	public int getDirection() {	return direction;	}
 	
 	/**
-	 * Sets the direction the enemy is moving
-	 * @param direction -1 for left, 1 for right, 0 for not moving
+	 * Sets the direction the enemy is moving and makes the character face that direction
+	 * @param direction
 	 */
 	public void setDirection(int direction) {
-		//if(direction == 1 || direction == 0 || direction == -1)
+		
 			this.direction = direction;	
+			
+				pic = idleImages(direction);
+			
+			
 	}	
 
 	/**
@@ -465,7 +491,7 @@ public class MeleeEnemy extends Enemy {
 
 
 	/**
-	 * get all necessary animation images for sout west movement
+	 * get all necessary animation images for south west movement
 	 */
 	public Image[] southWestAnamation()
 	{
@@ -673,8 +699,62 @@ public class MeleeEnemy extends Enemy {
 		
 			if(temp[0] == false)
 			{
-	setDirection(1);
-				yPos = yPos - speed;
+				
+				//if not already moving in this direction
+				if(direction != 1)
+				{
+					
+					direction = 1;
+					
+					anamationFrame  = 0;
+					
+					pic = northAnamation()[anamationFrame];
+					
+					animate = false;
+					
+						if(animationTimer.isRunning())
+						{
+							
+							animationTimer.restart();
+						
+						}
+						else
+						{
+							
+							animationTimer.start();
+							
+						}
+					
+				}
+				else//already moving this way
+				{
+					
+					if(animate == true)
+					{
+						
+						if((anamationFrame + 1) < northAnamation().length)
+						{
+							
+							anamationFrame++;
+							
+						}
+						else
+						{
+							
+							anamationFrame = 0;
+							
+						}
+						
+							pic = northAnamation()[anamationFrame];
+						
+							animate = false;
+				
+					}
+
+					
+				}
+
+					yPos = yPos - speed;
 			
 			}
 			else if(temp[1] == false && temp[3] == true)
@@ -764,7 +844,60 @@ public class MeleeEnemy extends Enemy {
 		
 			if(temp[0] == false && temp[1] == false)
 			{
-				setDirection(2);
+				
+				if(direction != 2)
+				{
+					
+					direction = 2;
+					anamationFrame  = 0;
+					
+					pic = northEastAnamation()[anamationFrame];
+					
+					animate = false;
+					
+					if(animationTimer.isRunning())
+					{
+						
+						animationTimer.restart();
+					
+					}
+					else
+					{
+						
+						animationTimer.start();
+						
+					}
+					
+				}
+				else
+				{
+					
+					if(animate == true)
+					{
+						
+						if((anamationFrame + 1) < northEastAnamation().length)
+						{
+							
+							anamationFrame++;
+							
+						}
+						else
+						{
+							
+							anamationFrame = 0;
+							
+						}
+						
+						pic = northEastAnamation()[anamationFrame];
+						
+						animate = false;
+				
+					}
+
+					
+				}
+				
+				
 				xPos = xPos + speed;
 				yPos = yPos - speed;
 			
@@ -801,7 +934,60 @@ public class MeleeEnemy extends Enemy {
 		
 			if(temp[1] == false)
 			{
-				setDirection(3);
+				
+				if(direction != 3)
+				{
+					
+					direction = 3;
+					anamationFrame  = 0;
+					
+					pic = eastAnamation()[anamationFrame];
+					
+					animate = false;
+					
+					if(animationTimer.isRunning())
+					{
+						
+						animationTimer.restart();
+					
+					}
+					else
+					{
+						
+						animationTimer.start();
+						
+					}
+					
+				}
+				else
+				{
+					
+					if(animate == true)
+					{
+						
+						if((anamationFrame + 1) < eastAnamation().length)
+						{
+							
+							anamationFrame++;
+							
+						}
+						else
+						{
+							
+							anamationFrame = 0;
+							
+						}
+						
+						pic = eastAnamation()[anamationFrame];
+						
+						animate = false;
+				
+					}
+
+					
+				}
+				
+				
 				xPos = xPos + speed;
 	
 			}
@@ -829,7 +1015,6 @@ public class MeleeEnemy extends Enemy {
 	/**
 	 * attempt to move south easterly
 	 * 
-	 * this method is attempting to test adding animation to this movement
 	 */
 	public void moveSouthEast()
 	{
@@ -839,54 +1024,59 @@ public class MeleeEnemy extends Enemy {
 		
 			if(temp[1] == false && temp[2] == false)
 			{
+				
 				if(direction != 4)
 				{
 					
 					direction = 4;
 					anamationFrame  = 0;
 					
-				}
-				
-				if(anamationUpdateCount == 0)
-				{
-					
 					pic = southEastAnamation()[anamationFrame];
 					
-						if(anamationFrame + 1 < southEastAnamation().length)
-						{
-							
-							anamationFrame  = anamationFrame + 1;
-						
-						}
-						else
-						{
-							
-							anamationFrame  = 0;
-							
-						}
+					animate = false;
 					
-	
-							anamationUpdateCount++;
+					if(animationTimer.isRunning())
+					{
+						
+						animationTimer.restart();
+					
+					}
+					else
+					{
+						
+						animationTimer.start();
+						
+					}
 					
 				}
 				else
 				{
 					
-					if(anamationUpdateCount < 10)
+					if(animate == true)
 					{
 						
-						anamationUpdateCount++;
+						if((anamationFrame + 1) < southEastAnamation().length)
+						{
+							
+							anamationFrame++;
+							
+						}
+						else
+						{
+							
+							anamationFrame = 0;
+							
+						}
 						
+						pic = southEastAnamation()[anamationFrame];
+						
+						animate = false;
+				
 					}
-					else
-					{
-						
-						anamationUpdateCount = 0;
-						
-					}
+
 					
 				}
-				setDirection(4);			
+			
 					xPos = xPos + speed;
 					yPos = yPos + speed;
 					
@@ -924,7 +1114,60 @@ public class MeleeEnemy extends Enemy {
 			
 			if(temp[2] == false)
 			{
-				setDirection(5);
+				
+				if(direction != 5)
+				{
+					
+					direction = 5;
+					anamationFrame  = 0;
+					
+					pic = southAnamation()[anamationFrame];
+					
+					animate = false;
+					
+					if(animationTimer.isRunning())
+					{
+						
+						animationTimer.restart();
+					
+					}
+					else
+					{
+						
+						animationTimer.start();
+						
+					}
+					
+				}
+				else
+				{
+					
+					if(animate == true)
+					{
+						
+						if((anamationFrame + 1) < southAnamation().length)
+						{
+							
+							anamationFrame++;
+							
+						}
+						else
+						{
+							
+							anamationFrame = 0;
+							
+						}
+						
+						pic = southAnamation()[anamationFrame];
+						
+						animate = false;
+				
+					}
+
+					
+				}
+				
+				
 				yPos = yPos + speed;
 			
 			}
@@ -959,7 +1202,60 @@ public class MeleeEnemy extends Enemy {
 		
 			if(temp[2] == false && temp[3] == false)
 			{
-				setDirection(6);
+				
+				if(direction != 6)
+				{
+					
+					direction = 6;
+					anamationFrame  = 0;
+					
+					pic = southWestAnamation()[anamationFrame];
+					
+					animate = false;
+					
+					if(animationTimer.isRunning())
+					{
+						
+						animationTimer.restart();
+					
+					}
+					else
+					{
+						
+						animationTimer.start();
+						
+					}
+					
+				}
+				else
+				{
+					
+					if(animate == true)
+					{
+						
+						if((anamationFrame + 1) < southWestAnamation().length)
+						{
+							
+							anamationFrame++;
+							
+						}
+						else
+						{
+							
+							anamationFrame = 0;
+							
+						}
+						
+						pic = southWestAnamation()[anamationFrame];
+						
+						animate = false;
+				
+					}
+
+					
+				}
+				
+				
 				xPos = xPos - speed;
 				yPos = yPos + speed;
 			
@@ -996,7 +1292,60 @@ public class MeleeEnemy extends Enemy {
 		
 			if(temp[3] == false)
 			{
-				setDirection(7);
+				
+				if(direction != 7)
+				{
+					
+					direction = 7;
+					anamationFrame  = 0;
+					
+					pic = westAnamation()[anamationFrame];
+					
+					animate = false;
+					
+					if(animationTimer.isRunning())
+					{
+						
+						animationTimer.restart();
+					
+					}
+					else
+					{
+						
+						animationTimer.start();
+						
+					}
+					
+				}
+				else
+				{
+					
+					if(animate == true)
+					{
+						
+						if((anamationFrame + 1) < westAnamation().length)
+						{
+							
+							anamationFrame++;
+							
+						}
+						else
+						{
+							
+							anamationFrame = 0;
+							
+						}
+						
+						pic = westAnamation()[anamationFrame];
+						
+						animate = false;
+				
+					}
+
+					
+				}
+				
+				
 				xPos = xPos - speed;
 		
 			}
@@ -1031,7 +1380,60 @@ public class MeleeEnemy extends Enemy {
 			
 			if(temp[0] == false && temp[3] == false)
 			{
-				setDirection(8);
+				
+				if(direction != 8)
+				{
+					
+					direction = 8;
+					anamationFrame  = 0;
+					
+					pic = northWestAnamation()[anamationFrame];
+					
+					animate = false;
+					
+					if(animationTimer.isRunning())
+					{
+						
+						animationTimer.restart();
+					
+					}
+					else
+					{
+						
+						animationTimer.start();
+						
+					}
+					
+				}
+				else
+				{
+					
+					if(animate == true)
+					{
+						
+						if((anamationFrame + 1) < northWestAnamation().length)
+						{
+							
+							anamationFrame++;
+							
+						}
+						else
+						{
+							
+							anamationFrame = 0;
+							
+						}
+						
+						pic = northWestAnamation()[anamationFrame];
+						
+						animate = false;
+				
+					}
+
+					
+				}
+				
+			
 				xPos = xPos - speed;
 				yPos = yPos - speed;
 			

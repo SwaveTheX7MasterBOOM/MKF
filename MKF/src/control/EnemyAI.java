@@ -322,19 +322,17 @@ public class EnemyAI
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * this methods makes one actor object move in the direction of another specified actor object.
 	 * 
 	 * @param billMurray
 	 * @param scarlettJohansson
 	 */
 	public static void pathTo(Actor billMurray, Actor scarlettJohansson)
 	{	
-	
+		//get the angle and then cardinal direction between the two actor objects
 		String s = Magellon.findCardinalDirection(Mathariffic.angleBetween2Coordinates(billMurray.getActualCenter(), scarlettJohansson.getActualCenter()));
 
-
+			//move based on the cardinal direction
 			switch(s)
 			{
 
@@ -407,7 +405,7 @@ public class EnemyAI
 	}
 	
 	/**
-	 * NOT IN USE
+	 * This methods changes the direction that the enemy object is facing randomly left or right.
 	 * 
 	 * @param georgeClooney
 	 */

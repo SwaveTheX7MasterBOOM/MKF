@@ -235,14 +235,28 @@ public interface Actor {
 	 */
 	public Rectangle getHitbox();
 	
-	/** */
+	/** remotely control character*/
 	public void moveNorth();
+	
+	/** remotely control character*/
 	public void moveNorthEast();
+	
+	/** remotely control character*/
 	public void moveEast();
+	
+	/** remotely control character*/
 	public void moveSouthEast();
+	
+	/** remotely control character*/
 	public void moveSouth();
+	
+	/** remotely control character*/
 	public void moveSouthWest();
+	
+	/** remotely control character*/
 	public void moveWest();
+	
+	/** remotely control character*/
 	public void moveNorthWest();
 	
 	
