@@ -712,6 +712,14 @@ public class MovementManager extends Thread
 	
 				}
 				
+				//kill the game
+				if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_ESCAPE))
+				{
+					
+					System.exit(0);
+	
+				}
+				
 				
 				if(CoreClass.KeyIn.isKeyDown(KeyEvent.VK_SPACE) && attack == 0)
 				{

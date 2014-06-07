@@ -65,9 +65,6 @@ public class MeleeEnemy extends Enemy {
 	
 	//what fram of the walking animation the character is currently in
 	private int anamationFrame = 0;
-	
-	//how many screen refreshes since last the animation frame was updated
-	private int anamationUpdateCount = 0;
 
 	//the collision boxes for the characters physical position
 	private Polygon upBox;
@@ -109,7 +106,6 @@ public class MeleeEnemy extends Enemy {
 	
 	//how large the sight collision object will be
 	private int sightRange = 600;
-
 
 	//if the character has been heard
 	private boolean heard = false;
@@ -1758,8 +1754,27 @@ public class MeleeEnemy extends Enemy {
 						  }
 					  
 					  }
-					  EnemyAI.pathTo(this,temp);
 					 
+					int dist = (int) Mathariffic.distanceBetween2Coordinates(this.getActualCenter(), temp.getActualCenter());
+					 
+					 	if(dist > 100)//move towards
+					 	{
+					 		
+					 		EnemyAI.pathTo(this,temp);
+					 		
+					 	}
+					 	else if(dist <= 100 && dist > 50)//ranged stun attack
+					 	{
+					 		
+					 		System.out.println("range stun**********************");
+					 		
+					 	}
+					 	else//melee attack
+					 	{
+					 	
+					 		System.out.println("melee ++++++++++++++++++++++++++");
+					 		
+					 	}
 					
 				}	
 				else if(see.size() == 0 && heard == true)//hear something moving near me

@@ -31,17 +31,27 @@ public class TheFrame extends JFrame
 	 */
 	public TheFrame()
 	{
+				
+		//this.setUndecorated(true);
 		
 		this.setVisible(true);
+		
+		this.setTitle("Monkey Knife Fight");
+		
+	//	this.setResizable(false);
 
 		this.createBufferStrategy(2);
 		
 		r = new Renderer();
 		
 		this.getContentPane().add(r);
+		
 		this.addKeyListener(CoreClass.KeyIn);
+		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
+		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+		
 		this.setCursor(CoreClass.coolkit.createCustomCursor(new ImageIcon("src/images/CC8.png").getImage(), new Point(0,0), "Cursor"));
 		
 	}
