@@ -1,10 +1,10 @@
 package control;
 
-
 import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,8 +19,6 @@ import logicalGameObjects.Enemy;
 import logicalGameObjects.HealthBar;
 import logicalGameObjects.Levels;
 import logicalGameObjects.PlatformObjects;
-
-
 
 
 /**
@@ -59,6 +57,9 @@ public class CoreClass
 	//The JFrame that contains the Renderer class JPanel
 	public static TheFrame fame;
 	
+		public static ActiveRenderer ac = new ActiveRenderer();
+			
+	
 	//the field of view
 	private static Camera cam;
 	
@@ -92,6 +93,8 @@ public class CoreClass
 		
 		fame = new TheFrame();
 		
+		fame.getContentPane().add(ac);
+		
 		mainCharacter = new Player((fame.getWidth() / 2), fame.getHeight() / 2);
 		
 		//testing healthbar setting max hp to 100
@@ -105,7 +108,11 @@ public class CoreClass
 
 				es.execute(new MovementManager());
 				es.execute(new EnemyManagment());
+				es.execute(ac);
 				es.execute(new CursorCompanion());
+				
+				
+				
 					es.shutdown();
 			
 
@@ -314,6 +321,56 @@ public class CoreClass
 		return allEnemies;		
 	}
 
+	/**
+	 * get a sorted list of all actors and setpieces on the screen
+	 * 
+	 * @return list of all the objects
+	 */
+	public static List<Object> getSortedObjectList()
+	{
+		
+		Coordinate tempUL = onScreenTile[0];
+		Coordinate tempBR = onScreenTile[1];
+		
+		
+		List<Object> everything = new ArrayList<Object>();
+       
+		everything.add(CoreClass.mainCharacter);
+       
+		
+       //add all NEEDED objects from a level to the above list everything that will be sorted based on the Y axis
+		for (int yy = tempUL.getY() - 1; yy <= tempBR.getY() + 1; yy++)
+		{
+			
+			for (int xx = tempUL.getX() - 1; xx <= tempBR.getX() + 1; xx++)
+			{
+				
+				ArrayList<Coordinate> al = new ArrayList<Coordinate> (CoreClass.getCurrentLevel().getPlaces().keySet());
 
+					for(Coordinate c:al)
+					{
+						
+						if(c.equals(new Coordinate(xx, yy)))
+						{
+
+							everything.addAll(CoreClass.getCurrentLevel().getPlaces().get(c));
+
+						}
+						
+					}
+
+			}
+			
+		}
+		
+		everything.addAll(CoreClass.getCurrentEn());
+		
+		//Sort the list to prepare the object to be drawn on screen based on the Y axis position
+		Collections.sort(everything, new YAxisSort());
+		
+		
+		return everything;
+		
+	}
 
 }

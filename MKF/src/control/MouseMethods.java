@@ -95,7 +95,7 @@ public class MouseMethods extends MouseInputAdapter
 	 */
 	public void mouseMoved(MouseEvent arg0)
 	{
-
+		
 		if(ignoreNextMove == false)
 		{
 
@@ -185,7 +185,7 @@ public class MouseMethods extends MouseInputAdapter
 	public void mousePressed(MouseEvent arg0)
 	{
 		
-		//System.out.println("pressed - (" + getMouseCoordinate().getX() + "," + getMouseCoordinate().getY() + ")");
+		System.out.println("pressed - (" + getMouseCoordinate().getX() + "," + getMouseCoordinate().getY() + ")");
 		
 	}
 
@@ -195,7 +195,7 @@ public class MouseMethods extends MouseInputAdapter
 	public void mouseReleased(MouseEvent arg0)
 	{
 		
-		//System.out.println("released - (" + getMouseCoordinate().getX() + "," + getMouseCoordinate().getY() + ")");
+		System.out.println("released - (" + getMouseCoordinate().getX() + "," + getMouseCoordinate().getY() + ")");
 		
 	}
 	
@@ -278,7 +278,7 @@ public class MouseMethods extends MouseInputAdapter
 	 */
 	public void setCursor(Cursor c)
 	{
-
+		//System.out.println("+++++++++++++++++++++++++++++++");
 		CoreClass.fame.setCursor(c);
 		
 	}

@@ -53,7 +53,7 @@ public class MovementManager extends Thread
 							try
 							{
 								
-								Thread.sleep(200);
+								Thread.sleep(300);
 								
 							} catch (InterruptedException e)
 							{
@@ -790,7 +790,7 @@ public class MovementManager extends Thread
 						
 						
 						left = true;
-						//System.out.println(isMoving +" "+ left);
+						
 						
 						//move player map position as long as it does not go outside of the map boundries 
 						if(CoreClass.mainCharacter.getMapX() - (CoreClass.mainCharacter.getSpeed() * 0.5) >= 0)
@@ -1003,7 +1003,7 @@ public class MovementManager extends Thread
 					try
 					{
 						
-						Thread.sleep(25);
+						Thread.sleep(20);
 						
 					} 
 					catch (InterruptedException e)

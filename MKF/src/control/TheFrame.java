@@ -2,6 +2,7 @@ package control;
 
 
 import java.awt.Point;
+import java.awt.image.BufferStrategy;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -23,7 +24,7 @@ public class TheFrame extends JFrame
 	private static final long serialVersionUID = 1L;
 	
 	
-	private Renderer r;
+	//private ActiveRenderer r;
 	
 
 	/**
@@ -34,6 +35,8 @@ public class TheFrame extends JFrame
 				
 		//this.setUndecorated(true);
 		
+		this.setIgnoreRepaint(true);
+		
 		this.setVisible(true);
 		
 		this.setTitle("Monkey Knife Fight");
@@ -42,9 +45,9 @@ public class TheFrame extends JFrame
 
 		this.createBufferStrategy(2);
 		
-		r = new Renderer();
+	//	r = new ActiveRenderer();
 		
-		this.getContentPane().add(r);
+	//	this.getContentPane().add(r);
 		
 		this.addKeyListener(CoreClass.KeyIn);
 		

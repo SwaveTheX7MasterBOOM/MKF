@@ -88,6 +88,8 @@ public class CursorCompanion implements Runnable
 		//fix this later
 		while(true)
 		{
+			
+			
 			//only do things if the mouse is on the screen		
 			if(CoreClass.mightyMouse.isOnScreen() == true)
 			{
@@ -407,7 +409,7 @@ public class CursorCompanion implements Runnable
 
 			}
 			else
-			{//wait to see if the mouse returns to the componet
+			{//wait to see if the mouse returns to the component
 				
 				try
 				{

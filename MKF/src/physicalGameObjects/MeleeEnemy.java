@@ -1716,13 +1716,13 @@ public class MeleeEnemy extends Enemy {
 				//*i don't see anyone nor do i hear anything moving in the distance*
 				if(see.size() == 0 && heard == false)
 				{
-					System.out.println("searching");
+					//System.out.println("searching");
 					EnemyAI.searchCL(this);
 		
 				}
 				else if(see.size() > 0)//*i see something*
 				{
-					System.out.println("I see you");
+					//System.out.println("I see you");
 					//chase
 					
 					Actor temp = null;
@@ -1766,25 +1766,25 @@ public class MeleeEnemy extends Enemy {
 					 	else if(dist <= 100 && dist > 50)//ranged stun attack
 					 	{
 					 		
-					 		System.out.println("range stun**********************");
+					 		//System.out.println("range stun**********************");
 					 		
 					 	}
 					 	else//melee attack
 					 	{
 					 	
-					 		System.out.println("melee ++++++++++++++++++++++++++");
+					 		//System.out.println("melee ++++++++++++++++++++++++++");
 					 		
 					 	}
 					
 				}	
 				else if(see.size() == 0 && heard == true)//hear something moving near me
 				{
-					System.out.println("I hear you");
+					//System.out.println("I hear you");
 					//*look around*
 					
 					 if(stopAndLook == false)
 					 {
-						 System.out.println("stop and look = false");
+						 //System.out.println("stop and look = false");
 					 	if(alerted == 0)
 					 	{
 					 		EnemyAI.randomLookAround(this);
@@ -1802,7 +1802,7 @@ public class MeleeEnemy extends Enemy {
 					 	
 					 	}
 				
-					 	System.out.println(alerted);
+					 	//System.out.println(alerted);
 					}
 	
 					
