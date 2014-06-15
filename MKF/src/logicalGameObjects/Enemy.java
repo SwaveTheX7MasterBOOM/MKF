@@ -293,6 +293,8 @@ public abstract class Enemy implements Actor
 
 	/** set right pathing collision box **/
 	public abstract void setRighPathtBox(Polygon righPathtBox);
+
+	public abstract void attacked(int attack, boolean[] hits);
 	
 
 }

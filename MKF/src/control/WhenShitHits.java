@@ -29,18 +29,60 @@ import logicalGameObjects.Setpiece;
 public class WhenShitHits
 {
 	/**
-	 * collision detection method for melee type enemies. Called by the melee enemy AI.
-	 * If the player is within the the enemies hitbox then the player's hitpoints is lowered
-	 * by the strength of the of the melee enemies attack strength.
-	 * 
-	 * @param me - Melee enemy object. The MeleeEnemeyobject that is is to undergo collision detection
+
 	 */
-	public static void MeleeEnemyAttackPlayer(MeleeEnemy me)
+	public static void enemyMeleeAttackPlayer(Polygon p)
 	{		
-		if(me.getHitbox().intersects(CoreClass.mainCharacter.getHitbox()))
-		{			
-			CoreClass.mainCharacter.setHitpoints(CoreClass.mainCharacter.getHitpoints() - me.getAttack());
+
+		boolean[] hits = {false, false, false, false};
+		boolean contact = false;
+		
+		if(p == null)
+		{
+			System.out.println("fuck");
 		}
+		
+		if(intersectionOf2Shapes(p, CoreClass.mainCharacter.getUpBox()))
+		{
+			
+			hits[0] = true;
+			
+			contact = true;
+			
+		}
+		
+		if(intersectionOf2Shapes(p, CoreClass.mainCharacter.getDownBox()))
+		{
+			
+			hits[1] = true;
+			
+			contact = true;
+			
+		}
+		
+		if(intersectionOf2Shapes(p, CoreClass.mainCharacter.getRightBox()))
+		{
+			
+			hits[2] = true;
+			
+			contact = true;
+			
+		}
+		
+		if(intersectionOf2Shapes(p, CoreClass.mainCharacter.getLeftBox()))
+		{
+			
+			hits[3] = true;
+			
+			contact = true;
+			
+		}
+		
+		if(contact == true)
+		{
+			System.out.println("enemy hit");
+		}
+		
 	}	
 	
 	/**
@@ -1298,7 +1340,6 @@ public class WhenShitHits
 	
 	/**
 	 * check the intersection of two polygon objects
-	 * NOT USED ATM but figured it might come in handy later
 	 * 
 	 * @param a - Shape object to be compared
 	 * @param b - Shape object to be compared
@@ -1314,6 +1355,163 @@ public class WhenShitHits
 		   
 		   			return !areaA.isEmpty();
 	
+	}
+
+	/**
+	 * 
+	 * right now checks all enemies on the board, improve efficiency later
+	 * 
+	 * @param i
+	 */
+	public static void playerMeleeAttEnemy(int i)
+	{
+		try {
+		Polygon temp = null;
+		List<Enemy> everything = CoreClass.getCurrentEn();
+		
+			CoreClass.enemySemaphore.acquire();
+			
+
+		
+		
+		
+		//int x = CoreClass.mainCharacter.getMapX() / 102;
+		//int y = CoreClass.mainCharacter.getMapY() / 102;
+		
+		
+			switch(i)
+			{
+			
+				case 1:
+					
+						temp = CoreClass.mainCharacter.getNorthAttackBox();
+					
+					break;
+			
+				
+				case 2:
+					
+						temp = CoreClass.mainCharacter.getNorthEastAttackBox();
+					
+					break;
+				
+					
+				case 3:
+					
+						temp = CoreClass.mainCharacter.getEastAttackBox();
+					
+					break;
+				
+					
+				case 4:
+					
+						temp = CoreClass.mainCharacter.getSouthEastAttackBox();
+					
+					break;
+				
+					
+				case 5:
+					
+						temp = CoreClass.mainCharacter.getSouthAttackBox();
+					
+					break;
+				
+					
+				case 6:
+					
+						temp = CoreClass.mainCharacter.getSouthWestAttackBox();
+					
+					break;
+				
+					
+				case 7:
+					
+						temp = CoreClass.mainCharacter.getWestAttackBox();
+					
+					break;
+				
+					
+				case 8:
+					
+						temp = CoreClass.mainCharacter.getNorthWestAttackBox();
+					
+					break;
+				
+			}
+		
+		
+		
+
+		
+		
+		
+					for(Enemy s:everything)
+					{
+						
+						boolean[] hits = {false, false, false, false};
+						boolean contact = false;
+						
+						if(intersectionOf2Shapes(temp, s.getUpBox()))
+						{
+							
+							hits[0] = true;
+							
+							contact = true;
+							
+						}
+						
+						if(intersectionOf2Shapes(temp, s.getDownBox()))
+						{
+							
+							hits[1] = true;
+							
+							contact = true;
+							
+						}
+						
+						if(intersectionOf2Shapes(temp, s.getRightBox()))
+						{
+							
+							hits[2] = true;
+							
+							contact = true;
+							
+						}
+						
+						if(intersectionOf2Shapes(temp, s.getLeftBox()))
+						{
+							
+							hits[3] = true;
+							
+							contact = true;
+							
+						}
+						
+						
+							if(contact == true)
+							{
+								
+					CoreClass.enemySemaphore.release();
+					
+					
+							s.attacked(CoreClass.mainCharacter.getAttack(), hits);
+							
+							return;
+							
+							}
+							
+					}
+		
+					
+		CoreClass.enemySemaphore.release();
+		
+		
+		return;
+					
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

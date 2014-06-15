@@ -87,6 +87,8 @@ public class Player implements Actor
 	
 	//how loud the player is being
 	private int decibelLevel = 0;
+
+	private String imageEffect = "";
 	
 
 	
@@ -95,7 +97,7 @@ public class Player implements Actor
 		
 		this.pic = new ImageIcon("src/images/idle_south.png").getImage();
 		
-		attack = 20;
+		attack = 40;
 		defense = 20;
 		speed = baseSpeed;
 		xPos = x;
@@ -971,5 +973,23 @@ public class Player implements Actor
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	
+	
+	@Override
+	public void setImageEffect(String s) {
+		imageEffect  = s;
+		
+	}
+
+
+	@Override
+	public String getImageEffect() {
+		// TODO Auto-generated method stub
+		return imageEffect;
+	}
+	
+	
 
 }

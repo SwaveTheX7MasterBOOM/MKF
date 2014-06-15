@@ -15,6 +15,7 @@ import logicalGameObjects.Actor;
 import logicalGameObjects.Coordinate;
 import logicalGameObjects.Enemy;
 
+import control.CoreClass;
 import control.EnemyAI;
 import control.Mathariffic;
 import control.WhenShitHits;
@@ -147,16 +148,170 @@ public class MeleeEnemy extends Enemy {
 		
 	};
 	
+	
+	
+	private ActionListener attackAL = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0)
+		{
+			
+			attacking = false;
+
+			switch(direction)
+			{
+			
+				case 1:
+					
+
+						
+						
+							attackTimer.stop();
+								
+						
+						xPos = xPos - (idleImages(1).getWidth(null) / 2) + (attackImage(1).getWidth(null) / 2);
+						
+						yPos=yPos + (attackImage(1).getHeight(null) / 2);
+							
+						setPic(idleImages(1));
+							
+						
+				
+					break;
+			
+				case 2:
+
+
+					
+					attackTimer.stop();
+							
+					
+		
+					setyPos(getyPos() + (attackImage(1).getHeight(null) / 2));
+						
+					setPic(idleImages(2));
+						
+					
+			
+				break;
+					
+				case 3:
+	
+
+					
+					attackTimer.stop();
+							
+
+					setyPos(getyPos() + (attackImage(1).getHeight(null) / 2));
+						
+					setPic(idleImages(3));
+						
+					
+			
+				break;
+					
+				case 4:
+	
+					
+					
+					attackTimer.stop();
+							
+
+					setPic(idleImages(4));
+						
+					
+			
+				break;
+					
+				case 5:
+					
+
+					
+					attackTimer.stop();
+							
+					
+					setxPos(getxPos() + (idleImages(1).getWidth(null)));
+					setPic(idleImages(5));
+						
+					
+			
+					
+					break;
+					
+				case 6:
+
+					
+					attackTimer.stop();
+							
+					
+					setxPos(getxPos() + (attackImage(1).getWidth(null) / 2));
+		
+					setPic(idleImages(6));
+					
+			
+				break;
+					
+				case 7:
+					
+
+					
+					attackTimer.stop();
+							
+					
+					setxPos(getxPos() + (attackImage(1).getWidth(null) / 2));
+					
+					setyPos(getyPos() + (attackImage(1).getHeight(null) / 2));
+						
+					setPic(idleImages(7));
+						
+					
+			
+				break;
+					
+				case 8:
+					
+
+					
+					attackTimer.stop();
+							
+					
+					setxPos(getxPos() + (attackImage(1).getWidth(null) / 2));
+					
+					setyPos(getyPos() + (attackImage(1).getHeight(null) / 2));
+						
+					setPic(idleImages(8));
+						
+					
+			
+				break;
+			}
+			
+
+			
+			
+		}
+		
+	};
+	
+	
 	//how long the character takes looking before moving to the next step
 	private Timer turnTimer = new Timer(1000, turnAL);
 	
 	//interval between animation frames
-	private int animationInterval = 200;
+	private int animationInterval = 300;
 	
 	//how long in between the various animation frames
 	private Timer animationTimer = new Timer(animationInterval, animationnAL);
 
+	private String imageEffect = "";
 
+	String objective = "searching";
+	
+	Object target = null;
+	
+	boolean attacking = false;
+
+	private Timer attackTimer = new Timer(200, attackAL);
 
 	public MeleeEnemy(int x, int y, int dir, int clx, int cly)
 	{
@@ -1701,17 +1856,23 @@ public class MeleeEnemy extends Enemy {
 	/**
 	 * Artificial intelligence for the character
 	 * 
-	 * currently just puts the character in a endless creeping line search pattern
+	 * 
 	 */
 	public void aI()
 	{
-			
+		if(attacking == false)
+		{
+		
 			List<Object> see = WhenShitHits.sightTest(this);
 
 			if(alerted == 0)
 			{
 			heard = WhenShitHits.hearingTest(this);
 			}	
+			
+			
+			if(objective.equals("searching"))
+			{
 			
 				//*i don't see anyone nor do i hear anything moving in the distance*
 				if(see.size() == 0 && heard == false)
@@ -1725,7 +1886,7 @@ public class MeleeEnemy extends Enemy {
 					//System.out.println("I see you");
 					//chase
 					
-					Actor temp = null;
+					
 					 
 					//the main character is priority, next would be the closest actor in the list
 					 for(Object o:see)
@@ -1735,7 +1896,33 @@ public class MeleeEnemy extends Enemy {
 						  if(o instanceof Player)
 						  {
 							  
-							  temp = (Actor) o;
+							  target = (Actor) o;
+							  System.out.println(target);
+							  CoreClass.addNotification(new DialogBox(this, "There IT is!!!!"));
+							  
+							  objective = "hunting";
+							  
+							/*	int dist1 = (int) Mathariffic.distanceBetween2Coordinates(this.getActualCenter(), target.getActualCenter());
+								 
+							 	if(dist1 > 100)//move towards
+							 	{
+							 		
+							 		EnemyAI.pathTo(this,target);
+							 		
+							 	}
+							 	else if(dist1 <= 100 && dist1 > 50)//ranged stun attack
+							 	{
+							 		
+							 		//System.out.println("range stun**********************");
+							 		CoreClass.addNotification(new DialogBox(this, "Stunn attack"));
+							 	}
+							 	else//melee attack
+							 	{
+							 	
+							 		//System.out.println("melee ++++++++++++++++++++++++++");
+							 		CoreClass.addNotification(new DialogBox(this, "melee"));
+							 	}*/
+							  
 							  
 							  	break;
 						  
@@ -1746,41 +1933,51 @@ public class MeleeEnemy extends Enemy {
 							 if(Mathariffic.distanceBetween2Coordinates(this.getActualCenter(), ((Enemy) o).getActualCenter()) > dist)
 							 {
 								 
-								 temp = (Actor) o;
+								 target = (Actor) o;
+								// CoreClass.addNotification(new DialogBox(this, "Hey Buddy!"));
+								 
 								 
 							 }
 							
 						  
+								int dist1 = (int) Mathariffic.distanceBetween2Coordinates(this.getActualCenter(), ((Actor) target).getActualCenter());
+								 
+							 	if(dist1 > 100)//move towards
+							 	{
+							 		
+							 		EnemyAI.pathTo(this,(Actor) target);
+							 		
+							 	}
+							 	else if(dist1 <= 100 && dist1 > 50)//ranged stun attack
+							 	{
+							 		
+							 		//System.out.println("range stun**********************");
+							 		CoreClass.addNotification(new DialogBox(this, "Hows is it going?"));
+							 		
+							 		EnemyAI.pathTo(this,(Actor) target);
+							 	}
+							 	else//melee attack
+							 	{
+							 	
+							 		//System.out.println("melee ++++++++++++++++++++++++++");
+							 		CoreClass.addNotification(new DialogBox(this, "I hate this place."));
+							 		
+							 		objective = "converse";
+							 		
+							 	}
+							 
 						  }
 					  
 					  }
 					 
-					int dist = (int) Mathariffic.distanceBetween2Coordinates(this.getActualCenter(), temp.getActualCenter());
-					 
-					 	if(dist > 100)//move towards
-					 	{
-					 		
-					 		EnemyAI.pathTo(this,temp);
-					 		
-					 	}
-					 	else if(dist <= 100 && dist > 50)//ranged stun attack
-					 	{
-					 		
-					 		//System.out.println("range stun**********************");
-					 		
-					 	}
-					 	else//melee attack
-					 	{
-					 	
-					 		//System.out.println("melee ++++++++++++++++++++++++++");
-					 		
-					 	}
+
 					
 				}	
 				else if(see.size() == 0 && heard == true)//hear something moving near me
 				{
 					//System.out.println("I hear you");
 					//*look around*
+					CoreClass.addNotification(new DialogBox(this, "Who's out there?"));
 					
 					 if(stopAndLook == false)
 					 {
@@ -1809,10 +2006,253 @@ public class MeleeEnemy extends Enemy {
 					
 				}
 				
+			}
+			else if(objective.equals("hunting"))
+			{
+				
+				if(see.contains(target))
+				{
+					
+					if(true)
+					{
+					
+						int dist1 = (int) Mathariffic.distanceBetween2Coordinates(this.getActualCenter(), ((Actor) target).getActualCenter());
+						 
+					 	if(dist1 > 25)//move towards
+					 	{
+					 		
+					 		EnemyAI.pathTo(this,(Actor) target);
+					 		
+					 	}
+					 	/*else if(dist1 <= 100 && dist1 > 50)//ranged stun attack
+					 	{
+					 		
+					 		//System.out.println("range stun**********************");
+					 		CoreClass.addNotification(new DialogBox(this, "Stunn attack"));
+					 		
+					 		EnemyAI.pathTo(this,(Actor) target);
+					 		
+					 	}*/
+					 	else//melee attack
+					 	{
+					 	
+					 		//System.out.println("melee ++++++++++++++++++++++++++");
+					 		CoreClass.addNotification(new DialogBox(this, "melee"));
+					 		meleeAttack();
+					 		
+					 	}
+				
+					}
+					else
+					{
+						
+						
+						//pick up?
+						
+					}
+			 	
+				}
+				else
+				{
+					
+
+
+					 if(stopAndLook == false)
+					 {
+						 //System.out.println("stop and look = false");
+					 	if(alerted == 0)
+					 	{
+					 		
+					 		CoreClass.addNotification(new DialogBox(this, "think you can lose me "));
+					 		
+					 		EnemyAI.pathTo(this,(Actor) target);
+					 		
+					 		
+							alerted = r.nextInt(4)+2;
+							stopAndLook = true;
+							turnTimer.start();
+					 	
+					 	}
+					 	else
+					 	{
+					 	
+					 	alerted--;
+					 	
+					 	
+					 	
+					 		if(alerted == 0)
+					 		{
+					 			CoreClass.addNotification(new DialogBox(this, "guess i lost the little shit "));
+					 			objective = "searching";
+					 			stopAndLook = false;
+					 		}
+					 		else
+					 		{
+					 			EnemyAI.pathTo(this,(Actor) target);
+					 			turnTimer.start();
+					 		}
+					 	
+					 	
+					 	}
+				
+					 	//System.out.println(alerted);
+					}
+					
+				}
+				
+			}
+			else if(objective.equals("converse"))
+			{
+				CoreClass.addNotification(new DialogBox(this, "have a conversation"));
+				objective = "searching";
+			}
+	
+			
+		}	
 	}
 		
 	
 
+
+	private void meleeAttack() 
+	{
+		if(attacking == false)
+		{
+			
+			
+		attacking = true;
+
+				switch(this.getDirection())
+				{
+				
+					case 1:
+						
+							this.setxPos(this.getxPos() + (this.idleImages(1).getWidth(null) / 2) - (this.attackImage(1).getWidth(null) / 2));
+							
+							this.setyPos(this.getyPos() - (this.attackImage(1).getHeight(null) / 2));
+								
+							this.setPic(this.attackImage(1));
+							
+							
+								attackTimer.start();
+									
+								WhenShitHits.enemyMeleeAttackPlayer(getNorthAttackBox());
+
+								
+							
+					
+						break;
+				
+					case 2:
+
+						this.setyPos(this.getyPos() - (this.attackImage(1).getHeight(null) / 2));
+							
+						this.setPic(this.attackImage(2));
+						
+						attackTimer.start();
+								
+						
+						WhenShitHits.enemyMeleeAttackPlayer(getNorthEastAttackBox());
+
+							
+						
+				
+					break;
+						
+					case 3:
+		
+						this.setyPos(this.getyPos() - (this.attackImage(1).getHeight(null) / 2));
+							
+						this.setPic(this.attackImage(3));
+						
+						attackTimer.start();
+								
+
+						WhenShitHits.enemyMeleeAttackPlayer(getEastAttackBox());
+						
+				
+					break;
+						
+					case 4:
+		
+						this.setPic(this.attackImage(4));
+						
+						attackTimer.start();
+								
+
+						WhenShitHits.enemyMeleeAttackPlayer(getSouthEastAttackBox());
+							
+						
+				
+					break;
+						
+					case 5:
+						
+						this.setxPos(this.getxPos() - (this.idleImages(1).getWidth(null)));
+							
+						this.setPic(this.attackImage(5));
+						
+						attackTimer.start();
+								
+		
+						WhenShitHits.enemyMeleeAttackPlayer(getSouthAttackBox());
+						
+				
+						
+						break;
+						
+					case 6:
+						
+						this.setxPos(this.getxPos() - (this.attackImage(1).getWidth(null) / 2));
+
+						this.setPic(this.attackImage(6));
+						
+						attackTimer.start();
+								
+						WhenShitHits.enemyMeleeAttackPlayer(getSouthWestAttackBox());
+				
+					break;
+						
+					case 7:
+						
+						this.setxPos(this.getxPos() - (this.attackImage(1).getWidth(null) / 2));
+						
+						this.setyPos(this.getyPos() - (this.attackImage(1).getHeight(null) / 2));
+							
+						this.setPic(this.attackImage(7));
+						
+						attackTimer.start();
+								
+						
+						WhenShitHits.enemyMeleeAttackPlayer(getWestAttackBox());
+							
+						
+				
+					break;
+						
+					case 8:
+						
+						this.setxPos(this.getxPos() - (this.attackImage(1).getWidth(null) / 2));
+						
+						this.setyPos(this.getyPos() - (this.attackImage(1).getHeight(null) / 2));
+							
+						this.setPic(this.attackImage(8));
+						
+						attackTimer.start();
+								
+						WhenShitHits.enemyMeleeAttackPlayer(getNorthWestAttackBox());
+
+							
+						
+				
+					break;
+				}
+				
+
+		}
+
+		
+	}
 
 	/**
 	 * 
@@ -2064,6 +2504,44 @@ public class MeleeEnemy extends Enemy {
 	 */
 	public void setAlerted(int alerted) {
 		this.alerted = alerted;
+	}
+	
+	
+	@Override
+	public void setImageEffect(String s) {
+		imageEffect = s;
+		
+	}
+
+
+	@Override
+	public String getImageEffect() {
+		// TODO Auto-generated method stub
+		return imageEffect;
+	}
+
+	@Override
+	public void attacked(int a, boolean[] hits)
+	{
+		if((a - defense) > 0)
+		{
+			if(hitpoints - (a - defense) > 0)
+			{
+				
+				hitpoints = hitpoints - (a - defense);
+			
+			}
+			else
+			{
+				
+				CoreClass.removeEnemy(this);
+				
+			}
+		}
+		
+		
+		System.out.println(hitpoints + " hp");
+		
 	}
 	
 

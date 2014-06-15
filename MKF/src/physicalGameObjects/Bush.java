@@ -47,6 +47,8 @@ public class Bush implements Setpiece
 	private boolean destructive = true;
 	private boolean explosive = false;
 
+	String imageEffect = "";
+	
 	//collision box
 	private Rectangle box; 	
 
@@ -434,5 +436,18 @@ public class Bush implements Setpiece
 		
 	}
 
+
+	@Override
+	public void setImageEffect(String s) {
+		imageEffect = s;
+		
+	}
+
+
+	@Override
+	public String getImageEffect() {
+		// TODO Auto-generated method stub
+		return imageEffect;
+	}
 
 }

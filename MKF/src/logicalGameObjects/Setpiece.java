@@ -69,6 +69,11 @@ public interface Setpiece
 
 	public void setDestructive(boolean destructive);
 	
+	public void setImageEffect(String s);
+	
+	public String getImageEffect();
+	
+	
 	
 	// what happens when something passes through the object, IF and object can pass through the object
 	public void collision();

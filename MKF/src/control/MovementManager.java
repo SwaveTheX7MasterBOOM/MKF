@@ -48,7 +48,7 @@ public class MovementManager extends Thread
 						
 						
 							WhenShitHits.playerMeleeAttSetpiece(1);
-						
+							WhenShitHits.playerMeleeAttEnemy(1);
 							
 							try
 							{
@@ -80,7 +80,8 @@ public class MovementManager extends Thread
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.attackImage(2));
 					
 					WhenShitHits.playerMeleeAttSetpiece(2);
-						
+					WhenShitHits.playerMeleeAttEnemy(2);
+					
 						try
 						{
 							
@@ -110,6 +111,7 @@ public class MovementManager extends Thread
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.attackImage(3));
 					
 					WhenShitHits.playerMeleeAttSetpiece(3);	
+					WhenShitHits.playerMeleeAttEnemy(3);
 					
 						try
 						{
@@ -137,7 +139,9 @@ public class MovementManager extends Thread
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.attackImage(4));
 					
 					WhenShitHits.playerMeleeAttSetpiece(4);
-						
+					WhenShitHits.playerMeleeAttEnemy(4);
+					
+					
 						try
 						{
 							
@@ -164,7 +168,9 @@ public class MovementManager extends Thread
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.attackImage(5));
 					
 					WhenShitHits.playerMeleeAttSetpiece(5);
-						
+					WhenShitHits.playerMeleeAttEnemy(5);	
+					
+					
 						try
 						{
 							
@@ -193,7 +199,9 @@ public class MovementManager extends Thread
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.attackImage(6));
 					
 					WhenShitHits.playerMeleeAttSetpiece(6);
-						
+					WhenShitHits.playerMeleeAttEnemy(6);	
+					
+					
 						try
 						{
 							
@@ -224,7 +232,9 @@ public class MovementManager extends Thread
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.attackImage(7));
 					
 					WhenShitHits.playerMeleeAttSetpiece(7);
-						
+					WhenShitHits.playerMeleeAttEnemy(7);	
+					
+					
 						try
 						{
 							
@@ -257,6 +267,7 @@ public class MovementManager extends Thread
 					CoreClass.mainCharacter.setPic(CoreClass.mainCharacter.attackImage(8));
 					
 					WhenShitHits.playerMeleeAttSetpiece(8);
+					WhenShitHits.playerMeleeAttEnemy(8);
 						
 						try
 						{
@@ -1003,7 +1014,7 @@ public class MovementManager extends Thread
 					try
 					{
 						
-						Thread.sleep(20);
+						Thread.sleep(30);
 						
 					} 
 					catch (InterruptedException e)

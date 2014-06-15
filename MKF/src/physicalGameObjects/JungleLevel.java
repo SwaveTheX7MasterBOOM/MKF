@@ -344,42 +344,7 @@ public class JungleLevel implements Levels
 		return platformPositionsY;		
 	}
 	
-	
-	/** 
-	 * get the enemies that are needed to be drawn on the screen 
-	 * 
-	 * @param x -  integer List containing array indexes of the needed enemy objects
-	 * @return Enemy [] containing specified enemy objects*
-	 */
-	public Enemy [] getEnemy(List <Integer> x)
-	{
-		Enemy[] temp = new Enemy[x.size()];	
-		
-		for(int z = 0; z < x.size(); z++)
-		{			
-			temp[z] = badGuys[x.get(z)];			
-		}		
-		return temp;		
-	}
-	
-	
-	/** get the x coordinates of the levels enemies 
-	 * 
-	 * @return int [] containing the x coordinate of enemy spawn locations
-	 */
-	public int [] getEnemySpawnPointX() 
-	{		
-		return badGuyPositionsX;		
-	}
-	
-	
-	/** get the x coordinates of the levels enemies
-	 * @return int [] containing the y coordinate of enemy spawn locations 
-	 */
-	public int [] getEnemySpawnPointY() 
-	{		
-		return badGuyPositionsY;		
-	}
+
 
 	/**
 	 * get specified tile map tile
@@ -389,6 +354,24 @@ public class JungleLevel implements Levels
 		
 		return tiles[i];
 		
+	}
+
+	@Override
+	public Enemy[] getEnemy(List<Integer> x) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] getEnemySpawnPointX() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int[] getEnemySpawnPointY() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

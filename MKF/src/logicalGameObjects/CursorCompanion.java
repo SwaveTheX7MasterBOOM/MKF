@@ -3,8 +3,17 @@ package logicalGameObjects;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.Robot;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
+
+import physicalGameObjects.Bomb;
+import physicalGameObjects.Bush;
+import physicalGameObjects.DialogBox;
+import physicalGameObjects.GumTree;
+import physicalGameObjects.MeleeEnemy;
+import physicalGameObjects.Player;
 
 import control.CoreClass;
 import control.Magellon;
@@ -38,6 +47,8 @@ public class CursorCompanion implements Runnable
 	private Image[]northWest = {new ImageIcon("src/images/CC14.png").getImage(), new ImageIcon("src/images/CC14_2.png").getImage(), new ImageIcon("src/images/CC14_3.png").getImage()};
 	private Image[] northNorthWest = {new ImageIcon("src/images/CC13.png").getImage(), new ImageIcon("src/images/CC13_2.png").getImage(), new ImageIcon("src/images/CC13_3.png").getImage()};
 	
+	
+	private List<Object>  hoverObjects = new ArrayList<Object>();
 	
 	public CursorCompanion()
 	{
@@ -430,7 +441,64 @@ public class CursorCompanion implements Runnable
 
 
 	}
+
+	public void addHoverObject(Object o) {
+		
+		hoverObjects.add(o);
+	}
 	
+	public void clearHoverObjects() {
+		
+		hoverObjects.clear();
+	}
+	
+	
+	public void talk()
+	{
+		
+		String s = "All I do Is Win";
+		
+if(hoverObjects.size() == 1)
+{
+		
+	for(Object o:hoverObjects)
+	{
+	
+if(o instanceof Bush)
+{
+	s = "I hate Bush";
+}
+else if(o instanceof Bomb)
+{
+	s = "It's a land mine";
+}
+else if(o instanceof GumTree)
+{
+	s = "So, this is where Gum comes from?!";
+}
+else if(o instanceof Player)
+{
+	s = "Bet you wish your were Donkey Kong.";
+}
+else if(o instanceof MeleeEnemy)
+{
+	s = "Loser";
+}
+
+	}
+}
+else if(hoverObjects.size() > 1)
+{
+	
+	s = "Fuck all this shit";
+	
+}
+		
+	
+		CoreClass.addNotification(new DialogBox(CoreClass.cc, s));
+		
+		
+	}
 	
 
 }

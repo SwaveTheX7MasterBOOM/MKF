@@ -51,6 +51,8 @@ public class Bomb implements Setpiece
 
 	//collision box
 	private Rectangle box;
+	
+	String imageEffect = "";
 
 	/**
 	 * CONSTRUCTOR
@@ -335,6 +337,20 @@ public class Bomb implements Setpiece
 		
 		CoreClass.mainCharacter.setHitpoints(currentHealth - this.explosionDamage);
 		CoreClass.healthBar.update();
+	}
+	
+	
+	@Override
+	public void setImageEffect(String s) {
+		imageEffect = s;
+		
+	}
+
+
+	@Override
+	public String getImageEffect() {
+		// TODO Auto-generated method stub
+		return imageEffect;
 	}
 	
 }

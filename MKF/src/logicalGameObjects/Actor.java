@@ -41,6 +41,12 @@ public interface Actor {
 	/** Sets the direction the character is facing*/
 	public void setDirection(int direction);
 	
+	
+	public void setImageEffect(String s);
+	
+	public String getImageEffect();
+	
+	
 	/** get the actual center of the character */
 	public Coordinate getActualCenter();
 

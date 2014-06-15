@@ -1,8 +1,13 @@
 package control;
 
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Point;
 import java.awt.image.BufferStrategy;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -40,6 +45,9 @@ public class TheFrame extends JFrame
 		this.setVisible(true);
 		
 		this.setTitle("Monkey Knife Fight");
+		
+
+
 		
 	//	this.setResizable(false);
 

@@ -5,9 +5,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
 import physicalGameObjects.JungleLevel;
 import physicalGameObjects.Player;
@@ -19,6 +22,7 @@ import logicalGameObjects.Enemy;
 import logicalGameObjects.HealthBar;
 import logicalGameObjects.Levels;
 import logicalGameObjects.PlatformObjects;
+import logicalGameObjects.PopUps;
 
 
 /**
@@ -42,6 +46,13 @@ public class CoreClass
 	//all platforms being drawn on screen
 	private static List <PlatformObjects> onScreenPlatforms = new ArrayList<PlatformObjects>();
 	
+	
+	public static Set<PopUps> notifications = new HashSet<PopUps>();
+	
+	static Semaphore dialogSemaphore = new Semaphore(1, true);
+	static Semaphore enemySemaphore = new Semaphore(1, true);
+	
+	
 	//The current level
 	private static Levels currentLevel;		
 	
@@ -57,8 +68,8 @@ public class CoreClass
 	//The JFrame that contains the Renderer class JPanel
 	public static TheFrame fame;
 	
-		public static ActiveRenderer ac = new ActiveRenderer();
-			
+	//
+	public static ActiveRenderer ac = new ActiveRenderer();		
 	
 	//the field of view
 	private static Camera cam;
@@ -80,6 +91,8 @@ public class CoreClass
 	
 	//for thread safety
 	private ExecutorService es;
+	
+	public static CursorCompanion cc = new CursorCompanion();
 
 	//
 	public static Toolkit coolkit = Toolkit.getDefaultToolkit();
@@ -106,11 +119,10 @@ public class CoreClass
 		
 		es = Executors.newCachedThreadPool();
 
-				es.execute(new MovementManager());
-				es.execute(new EnemyManagment());
 				es.execute(ac);
-				es.execute(new CursorCompanion());
-				
+				es.execute(new MovementManager());
+				es.execute(cc);
+				es.execute(new EnemyManagment());
 				
 				
 					es.shutdown();
@@ -255,6 +267,13 @@ public class CoreClass
 	public static List<Enemy> getCurrentEn()
 	{	
 		
+		try {
+			enemySemaphore.acquire();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		onScreenEnemies.clear();
 		
 		
@@ -274,6 +293,8 @@ public class CoreClass
 				}
 			
 		}
+		
+		enemySemaphore.release();
 		
 		return onScreenEnemies;		
 	}
@@ -318,6 +339,13 @@ public class CoreClass
 	 */
 	public static List<Enemy> getAllEn()
 	{		
+		try {
+			enemySemaphore.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		enemySemaphore.release();
 		return allEnemies;		
 	}
 
@@ -372,5 +400,58 @@ public class CoreClass
 		return everything;
 		
 	}
+	
+	
+	public synchronized static void addNotification(PopUps pop)
+	{
+		try {
+			dialogSemaphore.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		notifications.add(pop);
+		
+		
+		dialogSemaphore.release();
+		
+	}
 
+	
+	public synchronized static Set<PopUps> getNotifications()
+	{
+		
+		
+		return notifications;
+		
+	}
+
+
+	public synchronized static void removeNotification(PopUps pop)
+	{
+		try {
+			dialogSemaphore.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		notifications.remove(pop);
+		
+		dialogSemaphore.release();
+		
+	}
+
+
+	public synchronized static void removeEnemy(Enemy e)
+	{
+		try {
+			enemySemaphore.acquire();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(allEnemies.remove(e) + " enemy removed");
+		enemySemaphore.release();
+	}
 }

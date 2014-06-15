@@ -42,6 +42,8 @@ public class GumTree implements Setpiece
 
 	//collision box
 	private Rectangle box; 	
+	
+	String imageEffect = "";
 
 /**
  * CONSTRUCTOR
@@ -364,6 +366,20 @@ public class GumTree implements Setpiece
 		
 		
 		
+	}
+
+
+	@Override
+	public void setImageEffect(String s) {
+		imageEffect = s;
+		
+	}
+
+
+	@Override
+	public String getImageEffect() {
+		// TODO Auto-generated method stub
+		return imageEffect;
 	}
 	
 	
