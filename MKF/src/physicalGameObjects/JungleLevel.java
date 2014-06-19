@@ -82,7 +82,7 @@ public class JungleLevel implements Levels
 	//starting y position
 	int startY = 0;
 
-	private String music = "C:/Users/Snoe/git/MKF/MKF/SoundsnStuff/BGM02_AT3.wav";
+	private String music = "SoundsnStuff/x_men_theme.mp3";
 	// private static String music = "/MKF/SoundsnStuff/sw_3050.mp3";
 	
 	

@@ -18,10 +18,10 @@ public class Main
 	{
 		
 		/*try{
-			File file = new File("C:/Users/Snoe/Desktop/sw_4030.mp3");
+			File file = new File("SoundsnStuff/x_men_theme.mp3");
 			System.out.println(file.exists());
 			
-			Musics music = new Musics("C:/Users/Snoe/Desktop/sw_4030.mp3");
+			Musics music = new Musics("SoundsnStuff/x_men_theme.mp3");
 			music.play();
 			}catch(Exception e)
 			{
