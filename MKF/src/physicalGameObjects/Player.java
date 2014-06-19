@@ -991,5 +991,28 @@ public class Player implements Actor
 	}
 	
 	
+	public void attacked(int a, boolean[] hits)
+	{
+		if((a - defense) > 0)
+		{
+			if(hitpoints - (a - defense) > 0)
+			{
+				
+				hitpoints = hitpoints - (a - defense);
+			
+			}
+			else
+			{
+				
+				System.exit(0);
+				
+			}
+		}
+		
+		CoreClass.healthBar.update();
+		System.out.println(hitpoints + " hp - Player");
+		
+	}
+	
 
 }

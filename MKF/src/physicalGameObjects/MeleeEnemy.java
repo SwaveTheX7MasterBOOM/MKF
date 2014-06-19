@@ -318,7 +318,7 @@ public class MeleeEnemy extends Enemy {
 		
 		this.pic = new ImageIcon("src/images/idle_south.png").getImage();
 		
-		attack = 20;
+		attack = 25;
 		defense = 20;
 		speed = 1;
 		xPos = x;
@@ -2018,7 +2018,7 @@ public class MeleeEnemy extends Enemy {
 					
 						int dist1 = (int) Mathariffic.distanceBetween2Coordinates(this.getActualCenter(), ((Actor) target).getActualCenter());
 						 
-					 	if(dist1 > 25)//move towards
+					 	if(dist1 > 35)//move towards
 					 	{
 					 		
 					 		EnemyAI.pathTo(this,(Actor) target);
@@ -2136,7 +2136,7 @@ public class MeleeEnemy extends Enemy {
 							
 								attackTimer.start();
 									
-								WhenShitHits.enemyMeleeAttackPlayer(getNorthAttackBox());
+								WhenShitHits.enemyMeleeAttackPlayer(this, getNorthAttackBox());
 
 								
 							
@@ -2152,7 +2152,7 @@ public class MeleeEnemy extends Enemy {
 						attackTimer.start();
 								
 						
-						WhenShitHits.enemyMeleeAttackPlayer(getNorthEastAttackBox());
+						WhenShitHits.enemyMeleeAttackPlayer(this, getNorthEastAttackBox());
 
 							
 						
@@ -2168,7 +2168,7 @@ public class MeleeEnemy extends Enemy {
 						attackTimer.start();
 								
 
-						WhenShitHits.enemyMeleeAttackPlayer(getEastAttackBox());
+						WhenShitHits.enemyMeleeAttackPlayer(this, getEastAttackBox());
 						
 				
 					break;
@@ -2180,7 +2180,7 @@ public class MeleeEnemy extends Enemy {
 						attackTimer.start();
 								
 
-						WhenShitHits.enemyMeleeAttackPlayer(getSouthEastAttackBox());
+						WhenShitHits.enemyMeleeAttackPlayer(this, getSouthEastAttackBox());
 							
 						
 				
@@ -2195,7 +2195,7 @@ public class MeleeEnemy extends Enemy {
 						attackTimer.start();
 								
 		
-						WhenShitHits.enemyMeleeAttackPlayer(getSouthAttackBox());
+						WhenShitHits.enemyMeleeAttackPlayer(this, getSouthAttackBox());
 						
 				
 						
@@ -2209,7 +2209,7 @@ public class MeleeEnemy extends Enemy {
 						
 						attackTimer.start();
 								
-						WhenShitHits.enemyMeleeAttackPlayer(getSouthWestAttackBox());
+						WhenShitHits.enemyMeleeAttackPlayer(this, getSouthWestAttackBox());
 				
 					break;
 						
@@ -2224,7 +2224,7 @@ public class MeleeEnemy extends Enemy {
 						attackTimer.start();
 								
 						
-						WhenShitHits.enemyMeleeAttackPlayer(getWestAttackBox());
+						WhenShitHits.enemyMeleeAttackPlayer(this, getWestAttackBox());
 							
 						
 				
@@ -2240,7 +2240,7 @@ public class MeleeEnemy extends Enemy {
 						
 						attackTimer.start();
 								
-						WhenShitHits.enemyMeleeAttackPlayer(getNorthWestAttackBox());
+						WhenShitHits.enemyMeleeAttackPlayer(this, getNorthWestAttackBox());
 
 							
 						
@@ -2516,7 +2516,7 @@ public class MeleeEnemy extends Enemy {
 
 	@Override
 	public String getImageEffect() {
-		// TODO Auto-generated method stub
+		
 		return imageEffect;
 	}
 
@@ -2540,7 +2540,7 @@ public class MeleeEnemy extends Enemy {
 		}
 		
 		
-		System.out.println(hitpoints + " hp");
+		System.out.println(hitpoints + " hp - ENEMY");
 		
 	}
 	

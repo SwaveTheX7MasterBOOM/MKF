@@ -31,7 +31,7 @@ public class WhenShitHits
 	/**
 
 	 */
-	public static void enemyMeleeAttackPlayer(Polygon p)
+	public static void enemyMeleeAttackPlayer(Enemy me, Polygon p)
 	{		
 
 		boolean[] hits = {false, false, false, false};
@@ -39,7 +39,7 @@ public class WhenShitHits
 		
 		if(p == null)
 		{
-			System.out.println("fuck");
+			//System.out.println("fuck");
 		}
 		
 		if(intersectionOf2Shapes(p, CoreClass.mainCharacter.getUpBox()))
@@ -81,6 +81,7 @@ public class WhenShitHits
 		if(contact == true)
 		{
 			System.out.println("enemy hit");
+			CoreClass.mainCharacter.attacked(me.getAttack(), hits);
 		}
 		
 	}	

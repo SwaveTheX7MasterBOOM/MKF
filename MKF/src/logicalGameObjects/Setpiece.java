@@ -26,7 +26,7 @@ public interface Setpiece
 	public int getWidth();
 	
 	public Image getThing();
-	
+	  
 	public void setThing(Image thing);
 	
 	public void setHeight(int height);

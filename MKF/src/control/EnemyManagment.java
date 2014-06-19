@@ -20,7 +20,7 @@ public class EnemyManagment extends Thread
 		CoreClass.getAllEn().add(new MeleeEnemy(300, 0, 3, 100, 200));
 		CoreClass.getAllEn().add(new MeleeEnemy(2000, 1800, 4, 150, 300));
 		CoreClass.getAllEn().add(new MeleeEnemy(10,1820, 1, 60, 140));
-		CoreClass.getAllEn().add(new MeleeEnemy(1900, 300, 2, 300, 600));
+		CoreClass.getAllEn().add(new MeleeEnemy(1800, 300, 2, 300, 600));
 		
 	}
 
@@ -58,14 +58,14 @@ public class EnemyManagment extends Thread
 	 */
 	public boolean update()
 	{
-		
+
 		for(Enemy e:CoreClass.getAllEn())
 		{
 			
 			e.aI();
 			
 		}
-		
+	
 			return true;
 	}
 	
