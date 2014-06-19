@@ -1,4 +1,4 @@
-/control
-/logicalGameObjects
-/physicalGameObjects
-/images
+/logicalGameObjects/
+/control/
+/physicalGameObjects/
+/sounds/

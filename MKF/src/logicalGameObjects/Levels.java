@@ -13,6 +13,9 @@ public interface Levels
 	/** get background image for level  **/
 	public Image getBackground();
 	
+	/** get path for Background Music **/
+	public String getBGM();
+	
 	/** get characters x axis starting position on the map **/
 	public int getStartX();
 	

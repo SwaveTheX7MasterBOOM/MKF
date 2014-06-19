@@ -82,6 +82,9 @@ public class JungleLevel implements Levels
 	//starting y position
 	int startY = 0;
 
+	private String music = "C:/Users/Snoe/git/MKF/MKF/SoundsnStuff/BGM02_AT3.wav";
+	// private static String music = "/MKF/SoundsnStuff/sw_3050.mp3";
+	
 	
 	/** constructor **/
 	public JungleLevel()
@@ -276,6 +279,16 @@ public class JungleLevel implements Levels
 		
 		return backGround;
 		
+	}
+	
+	/**
+	 * get the BACKGROUND MUSIC of the level
+	 * 
+	 * @return String 
+	 */
+	public String getBGM()
+	{
+		return music;
 	}
 	
 	/**

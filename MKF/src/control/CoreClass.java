@@ -23,6 +23,7 @@ import logicalGameObjects.HealthBar;
 import logicalGameObjects.Levels;
 import logicalGameObjects.PlatformObjects;
 import logicalGameObjects.PopUps;
+import sounds.bgmTest;
 
 
 /**
@@ -67,6 +68,9 @@ public class CoreClass
 	
 	//The JFrame that contains the Renderer class JPanel
 	public static TheFrame fame;
+	
+	//Hopefully the music
+	public static bgmTest bgm;
 	
 	//
 	public static ActiveRenderer ac = new ActiveRenderer();		
@@ -116,6 +120,7 @@ public class CoreClass
 		cam = new Camera();
 		
 		currentLevel = new JungleLevel();	
+		bgm = new bgmTest(currentLevel.getBGM());
 		
 		es = Executors.newCachedThreadPool();
 
