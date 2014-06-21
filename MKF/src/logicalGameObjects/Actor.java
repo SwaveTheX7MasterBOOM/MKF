@@ -5,7 +5,7 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
-public interface Actor {
+public interface Actor extends DrawableObjects {
 	
 	//SETTERS AND GETTERS
 	/** Returns the image of the character */

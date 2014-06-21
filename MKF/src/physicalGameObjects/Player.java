@@ -1,9 +1,17 @@
 package physicalGameObjects;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 import javax.swing.ImageIcon;
 
@@ -89,6 +97,8 @@ public class Player implements Actor
 	private int decibelLevel = 0;
 
 	private String imageEffect = "";
+
+	private Font font;
 	
 
 	
@@ -112,6 +122,34 @@ public class Player implements Actor
 		
 		//set to 100 for now -- testing
 		hitpoints = 100;
+		
+		
+		
+		
+		
+		InputStream myStream = null;
+		try {
+			myStream = new BufferedInputStream(new FileInputStream("Assets/hot.ttf"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT , myStream);
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		font = font.deriveFont(Font.BOLD, 18);
+		
+		  GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		       ge.registerFont(font);
+		
 		
 	}
 	
@@ -1012,6 +1050,27 @@ public class Player implements Actor
 		CoreClass.healthBar.update();
 		System.out.println(hitpoints + " hp - Player");
 		
+	}
+
+
+	@Override
+	public Font getFont() {
+		
+		return font;
+	}
+
+
+	@Override
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return pic.getWidth(null);
+	}
+
+
+	@Override
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return pic.getHeight(null);
 	}
 	
 

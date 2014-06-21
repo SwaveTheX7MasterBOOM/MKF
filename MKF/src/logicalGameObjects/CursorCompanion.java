@@ -1,8 +1,17 @@
 package logicalGameObjects;
 
 import java.awt.AWTException;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Robot;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +35,7 @@ import control.Mathariffic;
  * @author Cobra Fucking Capach
  *
  */
-public class CursorCompanion implements Runnable
+public class CursorCompanion implements Runnable, DrawableObjects
 {
 
 	//Animation arrays
@@ -49,9 +58,36 @@ public class CursorCompanion implements Runnable
 	
 	
 	private List<Object>  hoverObjects = new ArrayList<Object>();
+	private Font font;
 	
 	public CursorCompanion()
 	{
+		//fonts should be registered only when needed
+		InputStream myStream = null;
+	
+			try {
+				myStream = new BufferedInputStream(new FileInputStream("Assets/cad.ttf"));
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		
+	
+			try {
+				font = Font.createFont(Font.TRUETYPE_FONT , myStream);
+			} catch (FontFormatException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		
+		font = font.deriveFont(Font.BOLD, 18);
+		
+		System.out.println(font);
+		
+		  GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		      System.out.println( ge.registerFont(font));
 		
 	}
 
@@ -498,6 +534,61 @@ else if(hoverObjects.size() > 1)
 		CoreClass.addNotification(new DialogBox(CoreClass.cc, s));
 		
 		
+	}
+
+	@Override
+	public Font getFont() {
+		// TODO Auto-generated method stub
+		  System.out.println(font);
+		return font;
+	}
+
+	@Override
+	public String getImageEffect() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Image getPic() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getxPos() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getyPos() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setImageEffect(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Rectangle getHitbox() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

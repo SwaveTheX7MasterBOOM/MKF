@@ -1,6 +1,7 @@
 package physicalGameObjects;
 
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ import control.CoreClass;
 
 import logicalGameObjects.Actor;
 import logicalGameObjects.CursorCompanion;
+import logicalGameObjects.DrawableObjects;
 import logicalGameObjects.PopUps;
 
 public class DialogBox implements PopUps
@@ -33,6 +35,8 @@ public class DialogBox implements PopUps
 	
 	Object obj;
 	
+	Font font;
+	
 	
 	private ActionListener upTimeAL = new ActionListener()
 	{
@@ -48,6 +52,8 @@ public class DialogBox implements PopUps
 	};
 	
 	private Timer t;
+
+	private DrawableObjects parent;
 
 	
 	/*public DialogBox(String s, int x, int y)
@@ -65,11 +71,15 @@ public class DialogBox implements PopUps
 		
 		
 	}*/
-	public DialogBox(Object obj, String s)
+	public DialogBox(DrawableObjects obj, String s)
 	{
 		
 		pic = new ImageIcon("src/images/dialog_box_1.png").getImage();
 
+		font = obj.getFont();
+		
+		setParent(obj);
+		
 		this.s = s;
 		this.obj = obj;
 		
@@ -119,7 +129,7 @@ public class DialogBox implements PopUps
 		
 		if(obj instanceof Actor)
 		{
-			return ((Actor) obj).getxPos() + CoreClass.ac.xOff;
+			return ((Actor) obj).getxPos() + -(CoreClass.mapUpperLeftOffset.getX()) - (CoreClass.onScreenTile[0].getX() * 102);
 		}
 		else if(obj instanceof CursorCompanion)
 		{
@@ -136,7 +146,7 @@ public class DialogBox implements PopUps
 		
 		if(obj instanceof Actor)
 		{
-			return ((Actor) obj).getyPos() + CoreClass.ac.yOff;
+			return ((Actor) obj).getyPos() + -(CoreClass.mapUpperLeftOffset.getY()) - (CoreClass.onScreenTile[0].getY() * 102);
 		}
 		else if(obj instanceof CursorCompanion)
 		{
@@ -197,6 +207,30 @@ public class DialogBox implements PopUps
 		
 				alive = false;
 		
+	}
+
+
+	@Override
+	public Font getFont() {
+		// TODO Auto-generated method stub
+		return font;
+	}
+
+
+	@Override
+	public void setFont(Font f) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public DrawableObjects getParent() {
+		return parent;
+	}
+
+
+	public void setParent(DrawableObjects parent) {
+		this.parent = parent;
 	}
 	
 }

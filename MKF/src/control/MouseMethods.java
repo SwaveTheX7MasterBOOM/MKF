@@ -21,6 +21,7 @@ import physicalGameObjects.Player;
 
 import logicalGameObjects.Actor;
 import logicalGameObjects.Coordinate;
+import logicalGameObjects.DrawableObjects;
 import logicalGameObjects.Enemy;
 import logicalGameObjects.Setpiece;
 
@@ -51,7 +52,7 @@ public class MouseMethods extends MouseInputAdapter
 	//if the next mouseMoved event should be ignored
 	private boolean ignoreNextMove = false;
 	
-	private List<Object> lastHoveredOver = new ArrayList<Object>();
+	private List<DrawableObjects> lastHoveredOver = new ArrayList<DrawableObjects>();
 
 	//action listener for mouse stopped
 	private ActionListener moveAL = new ActionListener()
@@ -72,27 +73,20 @@ public class MouseMethods extends MouseInputAdapter
 		private void findHover()
 		{
 			
-			List<Object> temp = CoreClass.getSortedObjectList();
+			List<DrawableObjects> temp = CoreClass.getSortedObjectList();
 			
 		
 			
-			for(Object obj:lastHoveredOver)
+			for(DrawableObjects obj:lastHoveredOver)
 			{
-				if(obj instanceof Actor)
-				{
-				((Actor) obj).setImageEffect("");
-				}
-				else if(obj instanceof Setpiece)
-				{
-					
-					((Setpiece) obj).setImageEffect("");
-				}
+				obj.setImageEffect("");
+
 			}
 			
 			lastHoveredOver.clear();
 			CoreClass.cc.clearHoverObjects();
 			
-			for(Object obj:temp)
+			for(DrawableObjects obj:temp)
 			{
 				if(obj instanceof Player)
 				{
@@ -117,13 +111,13 @@ public class MouseMethods extends MouseInputAdapter
 					
 					
 				}
-				else if(obj instanceof Enemy)
+				else// if(obj instanceof Enemy)
 				{
 					
-					Rectangle r = new Rectangle( (int)( ( (Enemy) obj ).getHitbox().getX() + (-(CoreClass.mapUpperLeftOffset.getX())) - (CoreClass.onScreenTile[0].getX() * 102)) ,
-							(int)( ( (Enemy) obj ).getHitbox().getY() + (-(CoreClass.mapUpperLeftOffset.getY())) - (CoreClass.onScreenTile[0].getY() * 102)) , 
-							(int)( (Enemy) obj ).getHitbox().getWidth() , 
-							(int)( (Enemy) obj ).getHitbox().getHeight() );
+					Rectangle r = new Rectangle( (int)( obj.getHitbox().getX() + (-(CoreClass.mapUpperLeftOffset.getX())) - (CoreClass.onScreenTile[0].getX() * 102)) ,
+							(int)( obj.getHitbox().getY() + (-(CoreClass.mapUpperLeftOffset.getY())) - (CoreClass.onScreenTile[0].getY() * 102)) , 
+							(int)obj.getWidth() , 
+							(int)obj.getHeight() );
 				
 					if(r.contains(getMouseCoordinate().getPoint()))
 					{
@@ -132,13 +126,13 @@ public class MouseMethods extends MouseInputAdapter
 					
 					CoreClass.cc.addHoverObject(obj);
 					
-					((Enemy) obj).setImageEffect("emboss");
+					obj.setImageEffect("emboss");
 					
 					}
 					
 					
 				}
-				else if(obj instanceof Setpiece)
+			/*	else if(obj instanceof Setpiece)
 				{
 					
 					//(int)((Setpiece) s).getBox().getX()+ cameraOffX - (tempUL.getX() * 102)
@@ -177,7 +171,7 @@ public class MouseMethods extends MouseInputAdapter
 				
 			
 					
-				}
+				}*/
 			}
 			
 		}

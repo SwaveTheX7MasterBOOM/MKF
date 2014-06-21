@@ -1,5 +1,6 @@
 package logicalGameObjects;
 
+import java.awt.Font;
 import java.awt.Image;
 import java.util.List;
 
@@ -46,5 +47,10 @@ public interface PopUps {
 
 
 	public int getY();
+
+
+
+	public Font getFont();
+	public void setFont(Font f);
 
 }

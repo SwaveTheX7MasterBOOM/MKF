@@ -9,15 +9,15 @@ import java.awt.Rectangle;
  * @author Thomas "Fucking" Capach
  *
  */
-public interface Setpiece
+public interface Setpiece extends DrawableObjects
 {
 	
 	//GETTERS AND SETTERS
-	public int getX();
+	public int getxPos();
 
 	public void setX(int x);
 
-	public int getY();
+	public int getyPos();
 
 	public void setY(int y);
 
@@ -25,9 +25,9 @@ public interface Setpiece
 	
 	public int getWidth();
 	
-	public Image getThing();
+	public Image getPic();
 	  
-	public void setThing(Image thing);
+	public void setPic(Image thing);
 	
 	public void setHeight(int height);
 	

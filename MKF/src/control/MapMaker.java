@@ -1300,10 +1300,10 @@ public class MapMaker
 			temp.setY(y);
 			
 
-			if(temp.getX() >= 0 && temp.getX() <= (world.length * 102 - width) && temp.getY() >= 0 && temp.getY() <= (world.length * 102 - length))
+			if(temp.getxPos() >= 0 && temp.getxPos() <= (world.length * 102 - width) && temp.getyPos() >= 0 && temp.getyPos() <= (world.length * 102 - length))
 			{
 
-				if(world[temp.getY()/102][temp.getX()/102] == 1 && world[y/102][x/102] == 1)// && world[y/102][x/102] == 1)
+				if(world[temp.getyPos()/102][temp.getxPos()/102] == 1 && world[y/102][x/102] == 1)// && world[y/102][x/102] == 1)
 				{
 					//System.out.println(a+"++++++++" + temp.getX()/102 + " / " + temp.getY()/102 + " / " + (world[temp.getY()/102][temp.getX()/102] == 1));
 					
@@ -1335,7 +1335,7 @@ public class MapMaker
 
 							count++;
 
-							worldObjects.put(new Coordinate(temp.getX()/102, temp.getY()/102), hs);
+							worldObjects.put(new Coordinate(temp.getxPos()/102, temp.getyPos()/102), hs);
 
 							hs = null;
 

@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +19,7 @@ import physicalGameObjects.Player;
 import logicalGameObjects.Camera;
 import logicalGameObjects.Coordinate;
 import logicalGameObjects.CursorCompanion;
+import logicalGameObjects.DrawableObjects;
 import logicalGameObjects.Enemy;
 import logicalGameObjects.HealthBar;
 import logicalGameObjects.Levels;
@@ -69,6 +71,9 @@ public class CoreClass
 	//The JFrame that contains the Renderer class JPanel
 	public static TheFrame fame;
 	
+	//
+	public static ThePanel pan;
+	
 	//Hopefully the music
 	public static bgmTest bgm;
 	
@@ -109,8 +114,9 @@ public class CoreClass
 	{		
 		
 		fame = new TheFrame();
+		pan = new ThePanel();
 		
-		fame.getContentPane().add(ac);
+		fame.getContentPane().add(pan);
 		
 		mainCharacter = new Player((fame.getWidth() / 2), fame.getHeight() / 2);
 		
@@ -359,14 +365,14 @@ public class CoreClass
 	 * 
 	 * @return list of all the objects
 	 */
-	public static List<Object> getSortedObjectList()
+	public static List<DrawableObjects> getSortedObjectList()
 	{
 		
 		Coordinate tempUL = onScreenTile[0];
 		Coordinate tempBR = onScreenTile[1];
 		
 		
-		List<Object> everything = new ArrayList<Object>();
+		List<DrawableObjects> everything = new ArrayList<DrawableObjects>();
        
 		everything.add(CoreClass.mainCharacter);
        
@@ -386,7 +392,7 @@ public class CoreClass
 						if(c.equals(new Coordinate(xx, yy)))
 						{
 
-							everything.addAll(CoreClass.getCurrentLevel().getPlaces().get(c));
+							everything.addAll( CoreClass.getCurrentLevel().getPlaces().get(c));
 
 						}
 						
@@ -432,7 +438,7 @@ public class CoreClass
 		
 	}
 
-
+//
 	public synchronized static void removeNotification(PopUps pop)
 	{
 		try {
@@ -459,4 +465,7 @@ public class CoreClass
 		System.out.println(allEnemies.remove(e) + " enemy removed");
 		enemySemaphore.release();
 	}
+
+
+
 }

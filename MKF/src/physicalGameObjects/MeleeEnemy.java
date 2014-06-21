@@ -1,10 +1,18 @@
 package physicalGameObjects;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Random;
 
@@ -313,6 +321,10 @@ public class MeleeEnemy extends Enemy {
 
 	private Timer attackTimer = new Timer(200, attackAL);
 
+	private Font font;
+	
+	
+
 	public MeleeEnemy(int x, int y, int dir, int clx, int cly)
 	{
 		
@@ -333,6 +345,32 @@ public class MeleeEnemy extends Enemy {
 		
 		//set to 100 for now -- testing
 		hitpoints = 100;
+		
+		
+		
+		InputStream myStream = null;
+		try {
+			myStream = new BufferedInputStream(new FileInputStream("Assets/fish.ttf"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT , myStream);
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		font = font.deriveFont(Font.BOLD, 18);
+		
+		  GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		       ge.registerFont(font);
+		
 
 	}
 	
@@ -2542,6 +2580,24 @@ public class MeleeEnemy extends Enemy {
 		
 		System.out.println(hitpoints + " hp - ENEMY");
 		
+	}
+
+	@Override
+	public Font getFont() {
+		// TODO Auto-generated method stub
+		return font;
+	}
+
+	@Override
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return pic.getWidth(null);
+	}
+
+	@Override
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return pic.getHeight(null);
 	}
 	
 

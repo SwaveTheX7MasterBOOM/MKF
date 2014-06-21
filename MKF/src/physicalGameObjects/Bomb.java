@@ -1,5 +1,6 @@
 package physicalGameObjects;
 
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
@@ -67,7 +68,7 @@ public class Bomb implements Setpiece
 	/**
 	 * get the objects x coordinate
 	 */
-	public int getX() {
+	public int getxPos() {
 		return x;
 	}
 	
@@ -81,7 +82,7 @@ public class Bomb implements Setpiece
 	/**
 	 *  get the objects y coordinate 
 	 */
-	public int getY() {
+	public int getyPos() {
 		return y;
 	}
 	
@@ -109,14 +110,14 @@ public class Bomb implements Setpiece
 	/**
 	 * get the objects image 
 	 */
-	public Image getThing() {
+	public Image getPic() {
 		return thing;
 	}
 	
 	/**
 	 * set the objects image 
 	 */
-	public void setThing(Image thing) {
+	public void setPic(Image thing) {
 		this.thing = thing;
 	}
 	
@@ -351,6 +352,22 @@ public class Bomb implements Setpiece
 	public String getImageEffect() {
 		// TODO Auto-generated method stub
 		return imageEffect;
+	}
+
+	@Override
+	public Font getFont() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
+	@Override
+	public Rectangle getHitbox() {
+		// TODO Auto-generated method stub
+		return new Rectangle(x, y, width, height);
 	}
 	
 }
